@@ -21,13 +21,22 @@ public class blockSpinny extends Block implements ITileEntityProvider{
 	public TileEntity createNewTileEntity(World var1, int var2) {
 		return new TileEntitySpinny();
 	}
+	
+	
 	@Override
 	public void onBlockHarvested(World world, int x, int y, int z, int par5, EntityPlayer player) {
 		if(!world.isRemote){
 			if(!player.capabilities.isCreativeMode){
 				world.createExplosion(player, x, y, z, 4, true);
-				player.setDead();
+				player.setHealth(0);
 			}
 		}
+	}
+	
+	@Override
+	public boolean onBlockActivated(World world, int x,	int y, int z, EntityPlayer player, int p_149727_6_,
+			float hitx, float hity, float hitz) {
+		return true;
+		
 	}
 }
