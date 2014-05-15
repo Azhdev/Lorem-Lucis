@@ -15,6 +15,7 @@ public class blockSpinny extends Block implements ITileEntityProvider{
 		super(mat);
 		setBlockName("spinny");
 		setCreativeTab(CreativeTabs.tabBlock);
+		setBlockBounds(0.1F, 0.2F, 0.1F, 0.9F, 0.2F, 0.9F);
 	}
 
 	@Override
@@ -58,6 +59,11 @@ public class blockSpinny extends Block implements ITileEntityProvider{
 		
 		return true;
 	}
+	
+	@Override
+	public boolean isOpaqueCube(){
+        return false;
+    }
 	
 	public int getRenderType(){
         return -1;
