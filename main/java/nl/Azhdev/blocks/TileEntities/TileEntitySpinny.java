@@ -30,4 +30,8 @@ public class TileEntitySpinny extends TileEntity {
 	public int getNextUse(){
 		return uses + 1;
 	}
+
+	public void getRandomEffect() {
+		
+	}
 }

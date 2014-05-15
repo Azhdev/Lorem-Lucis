@@ -36,7 +36,17 @@ public class blockSpinny extends Block implements ITileEntityProvider{
 	@Override
 	public boolean onBlockActivated(World world, int x,	int y, int z, EntityPlayer player, int p_149727_6_,
 			float hitx, float hity, float hitz) {
-		return true;
 		
+		if(!world.isRemote){
+			TileEntitySpinny s = (TileEntitySpinny)world.getTileEntity(x, y, z);
+			if(s.getUses() == 0){
+				s.setUses(1);
+			}else if(s.getUses() == 1){
+				s.getRandomEffect();
+			}
+
+		}
+		
+		return true;
 	}
 }
