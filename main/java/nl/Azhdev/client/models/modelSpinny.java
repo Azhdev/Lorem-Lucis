@@ -19,9 +19,19 @@ public class modelSpinny extends ModelBase{
 		mainTwistPart.setRotationPoint(0, 0, 0);
 		parts.add(mainTwistPart);
 		
-			
+		for(float r = 0; r < Math.PI * 2; r += Math.PI){
+			ModelRenderer side = new ModelRenderer(this, 0, 30);
+			side.addBox(-5, -2.5F, 5, 10, 5, 2);
+			side.setRotationPoint(0, 0, 0);
+			side.rotateAngleY = r;
+			mainTwistPart.addChild(side);
+		}
 		
-		
+		ModelRenderer back = new ModelRenderer(this, 24, 30);
+		back.addBox(-5, -2.5F, 5, 14, 5, 2);
+		back.setRotationPoint(0, 0, 0);
+		back.rotateAngleY = (float)(Math.PI * 1.5F);
+		mainTwistPart.addChild(back);
 	}
 	
 	public void RenderTile(float rotation, float pos, float a, float b, float c, float mult){

@@ -22,11 +22,11 @@ public class renderSpinnyBlock extends TileEntitySpecialRenderer{
 	public void renderTileEntityAt(TileEntity var1, double x, double y, double z, float var8) {
 		GL11.glPushMatrix();
 		
-		GL11.glTranslatef((float)x + 0.5F, (float)y + 0.5F, (float)z + 0.5F);
+		GL11.glTranslatef((float)x + 0.5F, (float)y + 1.5F, (float)z + 0.5F);
 		GL11.glScalef(0.5F, 0.5F, 0.5F);
 		
 		Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
-		model.RenderTile(0, 0, 0, 0, 0, 0.0625F);
+		model.RenderTile(0, 0, 0, 0, 0, 0.125F);
 		
 		GL11.glPopMatrix();
 	}
