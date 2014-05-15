@@ -22,6 +22,15 @@ public class blockSpinny extends Block implements ITileEntityProvider{
 		return new TileEntitySpinny();
 	}
 	
+	@Override
+	public boolean isNormalCube(){
+		return false;
+	}
+	
+	@Override
+	public boolean renderAsNormalBlock(){
+		return false;
+	}
 	
 	@Override
 	public void onBlockHarvested(World world, int x, int y, int z, int par5, EntityPlayer player) {
@@ -49,4 +58,8 @@ public class blockSpinny extends Block implements ITileEntityProvider{
 		
 		return true;
 	}
+	
+	public int getRenderType(){
+        return -1;
+    }
 }

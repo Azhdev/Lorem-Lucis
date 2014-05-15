@@ -23,6 +23,7 @@ public class nonameClass {
 	@EventHandler
 	public void Preinit(FMLPreInitializationEvent event){
 		AzhdevBlocks.initBlocks();
+		proxy.initRendering();
 	}
 	
 	@EventHandler
