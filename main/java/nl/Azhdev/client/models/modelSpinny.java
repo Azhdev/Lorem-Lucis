@@ -49,10 +49,31 @@ public class modelSpinny extends ModelBase{
 		mainTwistPart.addChild(front2);
 		
 		ModelRenderer frontd = new ModelRenderer(this, 40, 7);
-		frontd.addBox(-4, -2.5F, 5, 8, 5, 4);
+		frontd.addBox(-4, -5, 5, 8, 10, 4);
 		frontd.setRotationPoint(0, 0, 0);
 		frontd.rotateAngleY = (float)(Math.PI / 2);
 		mainTwistPart.addChild(frontd);
+		
+		ModelRenderer top1 = new ModelRenderer(this, 0, 44);
+		top1.addBox(-4.5F, -0.5F, -4.5F, 9, 1, 9);
+		top1.setRotationPoint(0, 10.5F, 0);
+		mainTwistPart.addChild(top1);
+		
+		ModelRenderer top2 = new ModelRenderer(this, 0, 54);
+		top2.addBox(-4, -0.5F, -4, 8, 1, 8);
+		top2.setRotationPoint(0, 11.5F, 0);
+		mainTwistPart.addChild(top2);
+		
+		
+		ModelRenderer base = new ModelRenderer(this, 0, 54);
+		base.addBox(-7F, -1.5F, -7F, 14, 3, 14);
+		base.setRotationPoint(0, -24, 0);
+		parts.add(base);
+		
+		ModelRenderer base2 = new ModelRenderer(this, 0, 71);
+		base2.addBox(-6, -1.5F, -6, 12, 3, 12);
+		base2.setRotationPoint(0, -22.5F, 0);
+		parts.add(base2);
 	}
 	
 	public void RenderTile(float rotation, float pos, float a, float b, float c, float mult){
