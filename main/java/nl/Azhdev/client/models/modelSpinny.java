@@ -17,7 +17,7 @@ public class modelSpinny extends ModelBase{
 		
 		mainTwistPart = new ModelRenderer(this);
 		mainTwistPart.addBox(-5, -10, -5, 10, 20, 10);
-		mainTwistPart.setRotationPoint(0, 0, 0);
+		mainTwistPart.setRotationPoint(0, 10, 0);
 		parts.add(mainTwistPart);
 		
 		ModelRenderer side1 = new ModelRenderer(this, 0, 30);
