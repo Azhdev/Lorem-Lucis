@@ -6,6 +6,19 @@ import net.minecraft.tileentity.TileEntity;
 public class TileEntitySpinny extends TileEntity {
 
 	private int uses = 0;
+	private float rotation;
+	private float bobpos;
+	
+	
+	@Override
+	public void updateEntity(){
+		if(worldObj.isRemote){
+			rotation += 0.02F;
+			bobpos += 0.02F;
+		}else{
+			
+		}
+	}
 	
 	@Override
 	public void writeToNBT(NBTTagCompound compound){
@@ -26,12 +39,16 @@ public class TileEntitySpinny extends TileEntity {
 	public void setUses(int i) {
 		uses = i;
 	}
-	
-	public int getNextUse(){
-		return uses + 1;
-	}
 
 	public void getRandomEffect() {
 		
+	}
+
+	public float getRotation() {
+		return rotation;
+	}
+
+	public float getBobPos() {
+		return -6 -Math.abs((float)Math.sin(bobpos) * 5.5F);
 	}
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import nl.Azhdev.blocks.TileEntities.TileEntitySpinny;
 
 public class modelSpinny extends ModelBase{
 	private ArrayList<ModelRenderer> parts;
@@ -76,7 +77,12 @@ public class modelSpinny extends ModelBase{
 		parts.add(base2);
 	}
 	
-	public void RenderTile(float rotation, float pos, float a, float b, float c, float mult){
+	public void RenderTile(TileEntitySpinny spinny, float rotation, float pos, float a, float b, float c, float mult){
+		
+		mainTwistPart.rotateAngleY = spinny.getRotation();
+		mainTwistPart.rotationPointY = spinny.getBobPos();
+		
+		
 		for(ModelRenderer part : parts){
 			part.render(mult);
 		}
