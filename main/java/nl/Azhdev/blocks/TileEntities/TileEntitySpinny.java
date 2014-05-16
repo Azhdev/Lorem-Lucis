@@ -2,7 +2,6 @@ package nl.Azhdev.blocks.TileEntities;
 
 import java.util.Random;
 
-import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,7 +14,6 @@ public class TileEntitySpinny extends TileEntity {
 	private float rotation;
 	private float bobpos;
 	Random random = new Random();
-	
 	@Override
 	public void updateEntity(){
 		if(worldObj.isRemote){
@@ -50,7 +48,7 @@ public class TileEntitySpinny extends TileEntity {
 		if(random.nextBoolean()){
 			performPositiveEffect(world, x, y, z, player);
 		}else{
-			performPositiveEffect(world, x, y, z, player);
+			performNegativeEffect(world, x, y, z, player);
 		}
 	}
 
@@ -61,7 +59,7 @@ public class TileEntitySpinny extends TileEntity {
 			if(player.getHealth() <= 10){
 				player.setHealth(16);
 			}else if(player.getHealth() <= 15 && player.getHealth() >= 10){
-				player.setHealth(16);gggg
+				player.setHealth(16);
 			}else{
 				player.setHealth(1);
 			}
@@ -71,8 +69,15 @@ public class TileEntitySpinny extends TileEntity {
 }
 	
 	
-	private void performNegativeEffect(){
-		
+	private void performNegativeEffect(World world, int x, int y, int z, EntityPlayer player){
+		int i = random.nextInt(12);
+		if(i == 1){
+			player.setHealth(1);
+			player.setSprinting(true);
+		}else if(i == 2){
+			world.createExplosion(player, x, y, z, 4, true);
+			player.setHealth(0);
+		}
 	}
 	
 	public float getRotation() {
