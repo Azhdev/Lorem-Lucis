@@ -6,6 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import nl.Azhdev.blocks.TileEntities.TileEntitySpinny;
 
@@ -51,13 +52,31 @@ public class blockSpinny extends Block implements ITileEntityProvider{
 			TileEntitySpinny s = (TileEntitySpinny)world.getTileEntity(x, y, z);
 			if(s.getUses() == 0){
 				s.setUses(1);
+				player.addChatComponentMessage(new ChatComponentText("clicking this block again will engage a random effect"));
+				player.addChatComponentMessage(new ChatComponentText("are you sure that you want to continue?"));
+				return true;
 			}else if(s.getUses() == 1){
-				s.performRandomEffect();
+				s.performRandomEffect(world, x, y, z, player);
+				s.setUses(2);
+				return true;
+			}else if(s.getUses() == 2){
+				player.addChatComponentMessage(new ChatComponentText("this block has already been activated!"));
+				player.addChatComponentMessage(new ChatComponentText("clicking this block again will have consequences!"));
+				s.setUses(3);
+				return false;
+			}else{
+				if(!player.capabilities.isCreativeMode){
+					world.createExplosion(player, x, y, z, 4, true);
+					player.setHealth(0);
+				}
+				return false;
 			}
 
+		}else{
+			return false;
 		}
 		
-		return true;
+		
 	}
 	
 	@Override

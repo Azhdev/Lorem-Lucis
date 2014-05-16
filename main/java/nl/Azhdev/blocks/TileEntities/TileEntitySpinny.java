@@ -2,8 +2,11 @@ package nl.Azhdev.blocks.TileEntities;
 
 import java.util.Random;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class TileEntitySpinny extends TileEntity {
 
@@ -42,16 +45,24 @@ public class TileEntitySpinny extends TileEntity {
 		uses = i;
 	}
 
-	public void performRandomEffect() {
+	public void performRandomEffect(World world, int x, int y, int z, EntityPlayer player) {
 		if(random.nextBoolean()){
-			performPositiveEffect();
+			performPositiveEffect(world, x, y, z, player);
 		}else{
 			performNegativeEffect();
 		}
 	}
 
-	private void performPositiveEffect(){
-		
+	private void performPositiveEffect(World world, int x, int y, int z, EntityPlayer player){
+		if(random.nextInt(12) == 1){
+			world.setBlock(x, y + 2, z, Blocks.diamond_ore);
+		}else if (random.nextInt(12) == 2){
+			if(player.getHealth() <= 10){
+				player.setHealth(player.getHealth() + 6);
+			}else if(player.getHealth() <= 15 && player.getHealth() >= 10){
+				player.setHealth(player.getHealth() + 3);
+			}
+		}
 	}
 	
 	private void performNegativeEffect(){
