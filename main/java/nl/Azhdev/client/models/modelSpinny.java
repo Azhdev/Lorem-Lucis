@@ -60,7 +60,7 @@ public class modelSpinny extends ModelBase{
 		top1.setRotationPoint(0, 10.5F, 0);
 		mainTwistPart.addChild(top1);
 		
-		ModelRenderer top2 = new ModelRenderer(this, 0, 54);
+		ModelRenderer top2 = new ModelRenderer(this, 27, 37);
 		top2.addBox(-4, -0.5F, -4, 8, 1, 8);
 		top2.setRotationPoint(0, 11.5F, 0);
 		mainTwistPart.addChild(top2);
@@ -81,7 +81,6 @@ public class modelSpinny extends ModelBase{
 		
 		mainTwistPart.rotateAngleY = spinny.getRotation();
 		mainTwistPart.rotationPointY = spinny.getBobPos();
-		
 		
 		for(ModelRenderer part : parts){
 			part.render(mult);
