@@ -52,7 +52,7 @@ public class blockSpinny extends Block implements ITileEntityProvider{
 			if(s.getUses() == 0){
 				s.setUses(1);
 			}else if(s.getUses() == 1){
-				s.getRandomEffect();
+				s.performRandomEffect();
 			}
 
 		}
