@@ -68,6 +68,8 @@ public class blockSpinny extends Block implements ITileEntityProvider{
 				if(!player.capabilities.isCreativeMode){
 					world.createExplosion(player, x, y, z, 4, true);
 					player.setHealth(0);
+				}else{
+					world.setBlockToAir(x, y, z);
 				}
 				return false;
 			}
