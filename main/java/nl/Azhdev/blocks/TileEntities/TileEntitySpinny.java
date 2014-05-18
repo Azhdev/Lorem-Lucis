@@ -5,6 +5,9 @@ import java.util.Random;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.PotionHelper;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -19,7 +22,7 @@ public class TileEntitySpinny extends TileEntity {
 	@Override
 	public void updateEntity(){
 		if(worldObj.isRemote){
-			if(isActivated()){
+			if(!isActivated()){
 				rotation += 0.02F;
 				bobpos += 0.02F;
 			}
@@ -59,9 +62,12 @@ public class TileEntitySpinny extends TileEntity {
 	}
 
 	private void performPositiveEffect(World world, int x, int y, int z, EntityPlayer player){
-		if(random.nextInt(12) == 1){
+		int i = random.nextInt(12);
+		switch(i){
+		case 0:
 			world.setBlock(x, y + 2, z, Blocks.diamond_ore);
-		}else if (random.nextInt(12) == 2){
+			
+		case 1:
 			if(player.getHealth() <= 10){
 				player.setHealth(16);
 			}else if(player.getHealth() <= 15 && player.getHealth() >= 10){
@@ -69,8 +75,13 @@ public class TileEntitySpinny extends TileEntity {
 			}else if(player.getHealth() >= 16){
 				player.setHealth(20);
 			}
-		}else if(random.nextInt(12) == 3){
 			
+		case 2:
+			player.addPotionEffect(new PotionEffect(13, 1200));
+		case 3:
+			player.addPotionEffect(new PotionEffect(12, 9600));
+		case 4:
+			player.addPotionEffect(new PotionEffect(10, 1200));
 		}
 }
 	
@@ -82,6 +93,10 @@ public class TileEntitySpinny extends TileEntity {
 		}else if(i == 2){
 			world.createExplosion(player, x, y, z, 4, true);
 			player.setHealth(0);
+		}else if(i == 3){
+			player.addExhaustion(10);
+		}else if(i == 4){
+			player.addPotionEffect(new PotionEffect(4, 1200));
 		}
 	}
 	
