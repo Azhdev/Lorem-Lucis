@@ -50,23 +50,15 @@ public class blockSpinny extends Block implements ITileEntityProvider{
 		
 		if(!world.isRemote){
 			TileEntitySpinny s = (TileEntitySpinny)world.getTileEntity(x, y, z);
-			if(s.getUses() == 0){
-				s.setUses(1);
-				player.addChatComponentMessage(new ChatComponentText("clicking this block again will engage a random effect"));
-				player.addChatComponentMessage(new ChatComponentText("are you sure that you want to continue?"));
-				return true;
-			}else if(s.getUses() == 1){
+			if(!s.isActivated()){
 				s.performRandomEffect(world, x, y, z, player);
-				s.setUses(2);
-				return true;
-			}else if(s.getUses() == 2){
-				player.addChatComponentMessage(new ChatComponentText("this block has already been activated!"));
-				s.setUses(3);
+				s.activate();
+				player.addChatComponentMessage(new ChatComponentText("block activated"));
 				return true;
 			}else{
+				player.addChatComponentMessage(new ChatComponentText("this block has already been activated"));
 				return false;
 			}
-
 		}else{
 			return false;
 		}

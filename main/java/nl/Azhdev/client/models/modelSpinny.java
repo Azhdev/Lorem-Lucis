@@ -79,8 +79,10 @@ public class modelSpinny extends ModelBase{
 	
 	public void RenderTile(TileEntitySpinny spinny, float rotation, float pos, float a, float b, float c, float mult){
 		
-		mainTwistPart.rotateAngleY = spinny.getRotation();
-		mainTwistPart.rotationPointY = spinny.getBobPos();
+		if(!spinny.isActivated()){
+			mainTwistPart.rotateAngleY = spinny.getRotation();
+			mainTwistPart.rotationPointY = spinny.getBobPos();
+		}
 		
 		for(ModelRenderer part : parts){
 			part.render(mult);

@@ -10,7 +10,6 @@ import net.minecraft.world.World;
 
 public class TileEntitySpinny extends TileEntity {
 
-	private int uses = 0;
 	private float rotation;
 	private float bobpos;
 	private boolean isActivated = false;
@@ -20,12 +19,9 @@ public class TileEntitySpinny extends TileEntity {
 	@Override
 	public void updateEntity(){
 		if(worldObj.isRemote){
-			if(!isActivated()){
+			if(isActivated()){
 				rotation += 0.02F;
 				bobpos += 0.02F;
-			}else{
-				rotation = 0;
-				bobpos = 0;
 			}
 		}
 	}
@@ -33,7 +29,6 @@ public class TileEntitySpinny extends TileEntity {
 	@Override
 	public void writeToNBT(NBTTagCompound compound){
 		super.writeToNBT(compound);
-		compound.setInteger("uses", uses);
 		compound.setFloat("rotation", rotation);
 		compound.setFloat("bobpos", bobpos);
 		compound.setBoolean("activated", isActivated);
@@ -42,20 +37,15 @@ public class TileEntitySpinny extends TileEntity {
 	@Override
 	public void readFromNBT(NBTTagCompound compound){
 		super.readFromNBT(compound);
-		uses = compound.getInteger("uses");
 		rotation = compound.getFloat("rotation");
 		bobpos = compound.getFloat("bobpos");
 		isActivated = compound.getBoolean("activated");
 	}
+
+	public void activate(){
+		isActivated = true;
+	}
 	
-	public int getUses() {
-		return uses;
-	}
-
-	public void setUses(int i) {
-		uses = i;
-	}
-
 	public boolean isActivated(){
 		return isActivated;
 	}
@@ -89,7 +79,6 @@ public class TileEntitySpinny extends TileEntity {
 		int i = random.nextInt(12);
 		if(i == 1){
 			player.setHealth(1);
-			player.setSprinting(true);
 		}else if(i == 2){
 			world.createExplosion(player, x, y, z, 4, true);
 			player.setHealth(0);
