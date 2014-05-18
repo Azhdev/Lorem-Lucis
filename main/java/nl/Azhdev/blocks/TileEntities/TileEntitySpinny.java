@@ -2,6 +2,7 @@ package nl.Azhdev.blocks.TileEntities;
 
 import java.util.Random;
 
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -63,11 +64,9 @@ public class TileEntitySpinny extends TileEntity {
 
 	private void performPositiveEffect(World world, int x, int y, int z, EntityPlayer player){
 		int i = random.nextInt(12);
-		switch(i){
-		case 0:
+		if(i == 0){
 			world.setBlock(x, y + 2, z, Blocks.diamond_ore);
-			
-		case 1:
+		}else if(i == 1){
 			if(player.getHealth() <= 10){
 				player.setHealth(16);
 			}else if(player.getHealth() <= 15 && player.getHealth() >= 10){
@@ -75,13 +74,14 @@ public class TileEntitySpinny extends TileEntity {
 			}else if(player.getHealth() >= 16){
 				player.setHealth(20);
 			}
-			
-		case 2:
+		}else if(i == 2){
 			player.addPotionEffect(new PotionEffect(13, 1200));
-		case 3:
+		}else if(i == 3){
 			player.addPotionEffect(new PotionEffect(12, 9600));
-		case 4:
+		}else if (i == 4){
 			player.addPotionEffect(new PotionEffect(10, 1200));
+		}else if(i == 5){
+			player.addPotionEffect(new PotionEffect(16, 1200));
 		}
 }
 	
@@ -97,6 +97,20 @@ public class TileEntitySpinny extends TileEntity {
 			player.addExhaustion(10);
 		}else if(i == 4){
 			player.addPotionEffect(new PotionEffect(4, 1200));
+		}else if(i == 5){
+			player.addPotionEffect(new PotionEffect(17, 600));
+		}else if(i == 6){
+			player.addPotionEffect(new PotionEffect(20, 200));
+		}else if(i == 7){
+			player.addPotionEffect(new PotionEffect(18, 1200));
+		}else if(i == 8){
+			player.setFire(10);
+		}else if(i == 9){
+			world.spawnEntityInWorld(new EntityCreeper(world));
+		}else if(i == 10){
+			world.setBlock(x, y, z, Blocks.lava);
+		}else if(i == 11){
+			world.
 		}
 	}
 	
