@@ -92,6 +92,12 @@ public class TileEntitySpinny extends TileEntity {
 			player.addExperienceLevel(5);
 		}else if(i == 9){
 			player.addPotionEffect(new PotionEffect(3, 1200));
+		}else if(i == 10){
+			world.setBlock(x, y, z, Blocks.mycelium);
+		}else if(i ==11){
+			player.addExperience(50);
+		}else if(i == 12){
+			world.setBlock(x, y + 2, z, Blocks.jukebox);
 		}
 }
 	
@@ -122,7 +128,7 @@ public class TileEntitySpinny extends TileEntity {
 		}else if(i == 11){
 			player.addPotionEffect(new PotionEffect(9, 600));
 		}else if(i == 12){
-			player.addPotionEffect(new PotionEffect(2, 1200));
+			player.destroyCurrentEquippedItem();
 		}
 	}
 	

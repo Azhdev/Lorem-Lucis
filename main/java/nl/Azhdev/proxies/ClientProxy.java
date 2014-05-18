@@ -12,5 +12,6 @@ public class ClientProxy extends commonProxy{
 		modelSpinny model = new modelSpinny();
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySpinny.class, new renderSpinnyBlock(model));
+		
 	}
 }
