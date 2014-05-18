@@ -44,6 +44,14 @@ public class TileEntitySpinny extends TileEntity {
 		uses = i;
 	}
 
+	public boolean isActive(){
+		if(uses >= 2){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 	public void performRandomEffect(World world, int x, int y, int z, EntityPlayer player) {
 		if(random.nextBoolean()){
 			performPositiveEffect(world, x, y, z, player);

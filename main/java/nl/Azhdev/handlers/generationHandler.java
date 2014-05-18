@@ -16,19 +16,18 @@ public class generationHandler implements IWorldGenerator{
 	}
 
 	private void generateSpinnies(World world, Random random, int chunkX, int chunkZ) {
-		int x = chunkX + random.nextInt(16);
+		int x = chunkX * random.nextInt(16);
 		int y = 256;
-		int z = chunkZ + random.nextInt(16);
+		int z = chunkZ * random.nextInt(16);
 		
-		for(int i = 0; i > 256; i++){
-			if(world.isAirBlock(x, y, z)){
-				y--;
-			}else{
-				break;
-			}
+		while(world.isAirBlock(x, y, z)){
+			y--;
 		}
-		
-		world.setBlock(x, y, z, AzhdevBlocks.spinny);
+		if(random.nextInt(1000) <= 1){
+			world.setBlock(x, y, z, AzhdevBlocks.spinny);
+			System.out.println("spinny spawned at: " + x + ", " + y + ", " + z);
+		}
+
 	}
 
 }

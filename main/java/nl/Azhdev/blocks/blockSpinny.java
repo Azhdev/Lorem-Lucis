@@ -61,16 +61,9 @@ public class blockSpinny extends Block implements ITileEntityProvider{
 				return true;
 			}else if(s.getUses() == 2){
 				player.addChatComponentMessage(new ChatComponentText("this block has already been activated!"));
-				player.addChatComponentMessage(new ChatComponentText("clicking this block again will have consequences!"));
 				s.setUses(3);
 				return false;
 			}else{
-				if(!player.capabilities.isCreativeMode){
-					world.createExplosion(player, x, y, z, 4, true);
-					player.setHealth(0);
-				}else{
-					world.setBlockToAir(x, y, z);
-				}
 				return false;
 			}
 
