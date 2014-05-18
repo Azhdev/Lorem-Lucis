@@ -3,12 +3,11 @@ package nl.Azhdev.blocks.TileEntities;
 import java.util.Random;
 
 import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionHelper;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -82,6 +81,17 @@ public class TileEntitySpinny extends TileEntity {
 			player.addPotionEffect(new PotionEffect(10, 1200));
 		}else if(i == 5){
 			player.addPotionEffect(new PotionEffect(16, 1200));
+		}else if(i == 6){
+			player.addPotionEffect(new PotionEffect(8, 200));
+			player.addPotionEffect(new PotionEffect(1, 200));
+		}else if(i == 7){
+			for(i = 0; i > 5; i++){
+				world.spawnEntityInWorld(new EntityPig(world));
+			}
+		}else if(i == 8){
+			player.addExperienceLevel(5);
+		}else if(i == 9){
+			player.addPotionEffect(new PotionEffect(3, 1200));
 		}
 }
 	
@@ -110,7 +120,9 @@ public class TileEntitySpinny extends TileEntity {
 		}else if(i == 10){
 			world.setBlock(x, y, z, Blocks.lava);
 		}else if(i == 11){
-			world.
+			player.addPotionEffect(new PotionEffect(9, 600));
+		}else if(i == 12){
+			player.addPotionEffect(new PotionEffect(2, 1200));
 		}
 	}
 	
