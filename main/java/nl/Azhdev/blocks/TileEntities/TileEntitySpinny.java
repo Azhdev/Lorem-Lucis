@@ -13,14 +13,20 @@ public class TileEntitySpinny extends TileEntity {
 	private int uses = 0;
 	private float rotation;
 	private float bobpos;
+	private boolean isActivated = false;
 	Random random = new Random();
+	
+	
 	@Override
 	public void updateEntity(){
 		if(worldObj.isRemote){
-			rotation += 0.02F;
-			bobpos += 0.02F;
-		}else{
-			
+			if(!isActivated()){
+				rotation += 0.02F;
+				bobpos += 0.02F;
+			}else{
+				rotation = 0;
+				bobpos = 0;
+			}
 		}
 	}
 	
@@ -28,12 +34,18 @@ public class TileEntitySpinny extends TileEntity {
 	public void writeToNBT(NBTTagCompound compound){
 		super.writeToNBT(compound);
 		compound.setInteger("uses", uses);
+		compound.setFloat("rotation", rotation);
+		compound.setFloat("bobpos", bobpos);
+		compound.setBoolean("activated", isActivated);
 	}
 	
 	@Override
 	public void readFromNBT(NBTTagCompound compound){
 		super.readFromNBT(compound);
 		uses = compound.getInteger("uses");
+		rotation = compound.getFloat("rotation");
+		bobpos = compound.getFloat("bobpos");
+		isActivated = compound.getBoolean("activated");
 	}
 	
 	public int getUses() {
@@ -44,12 +56,8 @@ public class TileEntitySpinny extends TileEntity {
 		uses = i;
 	}
 
-	public boolean isActive(){
-		if(uses >= 2){
-			return true;
-		}else{
-			return false;
-		}
+	public boolean isActivated(){
+		return isActivated;
 	}
 	
 	public void performRandomEffect(World world, int x, int y, int z, EntityPlayer player) {
@@ -68,8 +76,8 @@ public class TileEntitySpinny extends TileEntity {
 				player.setHealth(16);
 			}else if(player.getHealth() <= 15 && player.getHealth() >= 10){
 				player.setHealth(16);
-			}else{
-				player.setHealth(1);
+			}else if(player.getHealth() >= 16){
+				player.setHealth(20);
 			}
 		}else if(random.nextInt(12) == 3){
 			

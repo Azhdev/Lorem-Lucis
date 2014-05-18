@@ -16,7 +16,7 @@ public class blockSpinny extends Block implements ITileEntityProvider{
 		super(mat);
 		setBlockName("spinny");
 		setCreativeTab(CreativeTabs.tabBlock);
-		setBlockBounds(0.1F, 0.2F, 0.1F, 0.9F, 0.2F, 0.9F);
+		setBlockBounds(0.1F, 0, 0.1F, 0.9F, 0.2F, 0.9F);
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class blockSpinny extends Block implements ITileEntityProvider{
 			}else if(s.getUses() == 2){
 				player.addChatComponentMessage(new ChatComponentText("this block has already been activated!"));
 				s.setUses(3);
-				return false;
+				return true;
 			}else{
 				return false;
 			}
