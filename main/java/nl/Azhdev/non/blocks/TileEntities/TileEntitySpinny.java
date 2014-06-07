@@ -23,7 +23,7 @@ public class TileEntitySpinny extends TileEntity {
 	public void updateEntity(){
 		if(worldObj.isRemote){
 			if(!isActivated()){
-				rotation += 0.02F;
+				rotation += 0.01F;
 				bobpos += 0.02F;
 			}else{
 				rotation = 0;
@@ -140,6 +140,6 @@ public class TileEntitySpinny extends TileEntity {
 	}
 
 	public float getBobPos() {
-		return -6 -Math.abs((float)Math.sin(bobpos) * 5.5F);
+		return 6 -Math.abs((float)Math.sin(bobpos) * 5.5F);
 	}
 }

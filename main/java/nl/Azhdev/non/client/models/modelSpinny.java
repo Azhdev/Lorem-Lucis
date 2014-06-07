@@ -8,9 +8,11 @@ import nl.Azhdev.non.blocks.TileEntities.TileEntitySpinny;
 
 public class modelSpinny extends ModelBase{
 	private ArrayList<ModelRenderer> parts;
+	private ArrayList<ModelRenderer> sides;
 	private ModelRenderer mainTwistPart;
+	private ModelRenderer centerPart;
 	
-	public modelSpinny(){
+	public void odelSpinny(){
 		parts = new ArrayList<ModelRenderer>();
 		textureHeight = textureWidth = 128;
 		
@@ -77,6 +79,121 @@ public class modelSpinny extends ModelBase{
 		parts.add(base2);
 	}
 	
+	public modelSpinny(){
+		parts = new ArrayList<ModelRenderer>();
+		sides = new ArrayList<ModelRenderer>();
+		textureHeight = textureWidth = 128;
+		
+		centerPart = new ModelRenderer(this);
+		centerPart.addBox(-4, -8, -1, 8, 16, 8);
+		centerPart.setRotationPoint(0, 0, 0);
+		parts.add(centerPart);
+		
+		ModelRenderer top = new ModelRenderer(this, 32, 0);
+		top.addBox(-6, -1.5F, -6, 12, 3, 12);
+		top.setRotationPoint(0, 13.5F, 0);
+		centerPart.addChild(top);
+		
+		ModelRenderer top2 = new ModelRenderer(this, 34, 48);
+		top2.addBox(-8, 15, -8, 16, 1, 16);
+		top2.setRotationPoint(0, 0, 0);
+		centerPart.addChild(top2);
+		
+		ModelRenderer bottom = new ModelRenderer(this, 32, 0);
+		bottom.addBox(-6, -1.5F, -6, 12, 3, 12);
+		bottom.setRotationPoint(0, -13.5F, 0);
+		centerPart.addChild(bottom);
+		
+		ModelRenderer bottom2 = new ModelRenderer(this, 34, 48);
+		bottom2.addBox(-8, -16, -8, 16, 1, 16);
+		bottom2.setRotationPoint(0, 0, 0);
+		centerPart.addChild(bottom2);
+
+		ModelRenderer side1 = new ModelRenderer(this, 0, 24);
+		side1.addBox(-8.95F, -14.995F, -8.95F, 18, 30, 3);
+		side1.setRotationPoint(0, 0, 0);
+		side1.rotateAngleY = (float) (Math.PI /2);
+		sides.add(side1);
+		
+		ModelRenderer side2 = new ModelRenderer(this, 0, 24);
+		side2.addBox(-8.95F, -14.995F, -8.95F, 18, 30, 3);
+		side2.setRotationPoint(0, 0, 0);
+		side2.rotateAngleY = (float) (Math.PI  * 1.5F);
+		sides.add(side2);
+		
+		ModelRenderer back = new ModelRenderer(this, 0, 24);
+		back.addBox(-9, -15, -9, 18, 30, 3);
+		back.setRotationPoint(0, 0, 0);
+		sides.add(back);
+
+		ModelRenderer side3 = new ModelRenderer(this, 0, 57);
+		side3.addBox(-8, -14, 9, 16, 28, 1);
+		side3.setRotationPoint(0, 0, 0);
+		side3.rotateAngleY = (float) (Math.PI / 2);
+		sides.add(side3);
+		
+		ModelRenderer side4 = new ModelRenderer(this, 0, 57);
+		side4.addBox(-8, -14, 9, 16, 28, 1);
+		side4.setRotationPoint(0, 0, 0);
+		side4.rotateAngleY = (float) (Math.PI * 1.5F);
+		sides.add(side4);
+		
+		ModelRenderer side5 = new ModelRenderer(this, 34, 68);
+		side5.addBox(-6, -12, 10, 12, 24, 1);
+		side5.setRotationPoint(0, 0, 0);
+		side5.rotateAngleY = (float) (Math.PI /2);
+		centerPart.addChild(side5);
+		
+		ModelRenderer side6 = new ModelRenderer(this, 34, 68);
+		side6.addBox(-6, -12, 10, 12, 24, 1);
+		side6.setRotationPoint(0, 0, 0);
+		side6.rotateAngleY = (float) (Math.PI * 1.5);
+		centerPart.addChild(side6);
+		
+		ModelRenderer back2 = new ModelRenderer(this, 0, 57);
+		back2.addBox(-8, -14, 9, 16, 28, 1);
+		back2.setRotationPoint(0, 0, 0);
+		back2.rotateAngleY = (float) Math.PI;
+		sides.add(back2);
+		
+		ModelRenderer back3 = new ModelRenderer(this, 34, 68);
+		back3.addBox(-6, -12, 10, 12, 24, 1);
+		back3.setRotationPoint(0, 0, 0);
+		back3.rotateAngleY = (float)Math.PI;
+		centerPart.addChild(back3);
+		
+		ModelRenderer front_bottom = new ModelRenderer(this, 42, 15);
+		front_bottom.addBox(-6, -15, 4, 12, 7, 5);
+		front_bottom.setRotationPoint(0, 0, 0);
+		centerPart.addChild(front_bottom);
+		
+		ModelRenderer front_top = new ModelRenderer(this, 42, 15);
+		front_top.addBox(-6, -14.995F, 4, 12, 7, 5);
+		front_top.setRotationPoint(0, 0, 0);
+		front_top.rotateAngleX = front_top.rotateAngleY = (float) Math.PI;
+		centerPart.addChild(front_top);
+		
+		ModelRenderer front_side1 = new ModelRenderer(this, 42, 27);
+		front_side1.addBox(-6, -7.995F, 4, 2, 16, 5);
+		front_side1.setRotationPoint(0, 0, 0);
+		centerPart.addChild(front_side1);
+		
+		ModelRenderer front_side2 = new ModelRenderer(this, 42, 27);
+		front_side2.addBox(-6, -7.995F, 4, 2, 16, 5);
+		front_side2.setRotationPoint(0, 0, 0);
+		front_side2.rotateAngleZ = (float) Math.PI;
+		centerPart.addChild(front_side2);
+		
+		ModelRenderer pad1 = new ModelRenderer(this, 34, 48);
+		pad1.addBox(-8, -24, -8, 16, 4, 16);
+		pad1.setRotationPoint(0, 0, 0);
+		parts.add(pad1);
+		
+		for(ModelRenderer side : sides){
+			centerPart.addChild(side);
+		}
+	}
+	
 	public void renderInv(float mult){
 		for(ModelRenderer part : parts){
 			part.render(mult);
@@ -85,8 +202,8 @@ public class modelSpinny extends ModelBase{
 	
 	public void RenderTile(TileEntitySpinny spinny, float rotation, float pos, float a, float b, float c, float mult){
 		
-		mainTwistPart.rotateAngleY = spinny.getRotation();
-		mainTwistPart.rotationPointY = spinny.getBobPos();
+		centerPart.rotateAngleY = spinny.getRotation();
+		centerPart.rotationPointY = spinny.getBobPos();
 		
 		for(ModelRenderer part : parts){
 			part.render(mult);

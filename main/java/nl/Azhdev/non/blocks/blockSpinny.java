@@ -18,7 +18,7 @@ public class blockSpinny extends Block implements ITileEntityProvider{
 		super(mat);
 		setBlockName("spinny");
 		setCreativeTab(CreativeTabs.tabBlock);
-		setBlockBounds(0.1F, 0, 0.1F, 0.9F, 0.2F, 0.9F);
+		setBlockBounds(0, 0, 0, 1, 1, 1);
 		setBlockTextureName("non:spinny");
 	}
 

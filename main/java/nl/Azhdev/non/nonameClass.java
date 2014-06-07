@@ -14,10 +14,10 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 
-@Mod(modid = "2636", name = "noname", version = "1.7.2-1.1")
+@Mod(modid = "LL", name = "Lorem Lucis", version = "1.7.2-2.0")
 public class nonameClass {
 	
-	@Instance("2636")
+	@Instance("LL")
 	public static nonameClass instance;
 	
 	@SidedProxy(clientSide = "nl.Azhdev.non.proxies.ClientProxy", serverSide = "nl.Azhdev.non.proxies.commonProxy")
