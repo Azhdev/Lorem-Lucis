@@ -1,0 +1,4 @@
+{
+	"boneyScream": {"catagory": "master","sounds": [{"name": "scream","stream": false}]},
+	"bleep": {"catagory": "master","sounds": [{"name": "bleep-sortoff","stream": false}]}
+}

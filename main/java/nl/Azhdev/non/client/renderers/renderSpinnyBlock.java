@@ -18,12 +18,12 @@ public class renderSpinnyBlock extends TileEntitySpecialRenderer implements ISim
 
 	private modelSpinny model;
 	
-	public renderSpinnyBlock(modelSpinny model){
+	public renderSpinnyBlock(modelSpinny model, boolean d){
 		this.model = model;
 	}
 	
 	private static final ResourceLocation texture = new ResourceLocation("non", "textures/models/spinny.png");
-	private static final ResourceLocation texture_new = new ResourceLocation("non", "textures/models/spinny_new.png");
+	private static final ResourceLocation texture_new = new ResourceLocation("non", "textures/models/spinny_new2.png");
 	
 	@Override
 	public void renderTileEntityAt(TileEntity var1, double x, double y, double z, float var8) {
@@ -32,8 +32,11 @@ public class renderSpinnyBlock extends TileEntitySpecialRenderer implements ISim
 		
 		GL11.glTranslatef((float)x + 0.5F, (float)y + 1.5F, (float)z + 0.5F);
 		GL11.glScalef(0.5F, 0.5F, 0.5F);
-		
-		Minecraft.getMinecraft().getTextureManager().bindTexture(texture_new);
+		if(spinny.shine){
+			Minecraft.getMinecraft().getTextureManager().bindTexture(texture_new);
+		}else{
+			Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
+		}
 		model.RenderTile(spinny, 0, 0, 0, 0, 0, 0.125F);
 		
 		GL11.glPopMatrix();

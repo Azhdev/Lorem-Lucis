@@ -2,6 +2,7 @@ package nl.Azhdev.non.blocks.TileEntities;
 
 import java.util.Random;
 
+import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,7 +10,10 @@ import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
+import nl.Azhdev.non.client.renderers.renderSpinnyBlock;
+import nl.Azhdev.non.handlers.soundHandler;
 
 public class TileEntitySpinny extends TileEntity {
 
@@ -17,6 +21,7 @@ public class TileEntitySpinny extends TileEntity {
 	private float bobpos;
 	private boolean isActivated = false;
 	Random random = new Random();
+	public boolean shine;
 	
 	
 	@Override
@@ -29,9 +34,20 @@ public class TileEntitySpinny extends TileEntity {
 				rotation = 0;
 				bobpos = 0;
 			}
-		}
+			
+		}else{
+			refreshTexture();
+		}	
 	}
 	
+	private void refreshTexture() {
+		if(worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) && worldObj.isDaytime()){
+			shine = true;
+		}else{
+			shine = false;
+		}
+	}
+
 	@Override
 	public void writeToNBT(NBTTagCompound compound){
 		super.writeToNBT(compound);
@@ -88,30 +104,40 @@ public class TileEntitySpinny extends TileEntity {
 			player.addPotionEffect(new PotionEffect(8, 200));
 			player.addPotionEffect(new PotionEffect(1, 200));
 		}else if(i == 7){
-			for(i = 0; i > 5; i++){
-				world.spawnEntityInWorld(new EntityPig(world));
-			}
+			EntityPig pig = new EntityPig(world);
+			pig.setPosition(x, y+1, z);
+			world.spawnEntityInWorld(pig);
 		}else if(i == 8){
 			player.addExperienceLevel(5);
 		}else if(i == 9){
 			player.addPotionEffect(new PotionEffect(3, 1200));
 		}else if(i == 10){
-			world.setBlock(x, y, z, Blocks.mycelium);
+			world.setBlock(x, y + 2, z, Blocks.mycelium);
 		}else if(i ==11){
 			player.addExperience(50);
 		}else if(i == 12){
 			world.setBlock(x, y + 2, z, Blocks.jukebox);
 		}
+		soundHandler.playSound("bleep", world, player, 1, 1);
 }
 	
 	
 	private void performNegativeEffect(World world, int x, int y, int z, EntityPlayer player){
 		int i = random.nextInt(12);
 		if(i == 1){
-			player.setHealth(1);
+			if(!player.capabilities.isCreativeMode){
+				player.setHealth(1);
+			}else{
+				player.addChatComponentMessage(new ChatComponentText("i was going to reduce your health but you're in creative mode :("));
+			}
 		}else if(i == 2){
-			world.createExplosion(player, x, y, z, 4, true);
-			player.setHealth(0);
+			if(!player.capabilities.isCreativeMode){
+				world.createExplosion(player, x, y, z, 4, true);
+				player.setHealth(0);
+				
+			}else{
+				player.addChatComponentMessage(new ChatComponentText("i was going to kill you but you're in creative mode :("));
+			}
 		}else if(i == 3){
 			player.addExhaustion(10);
 		}else if(i == 4){
@@ -125,13 +151,23 @@ public class TileEntitySpinny extends TileEntity {
 		}else if(i == 8){
 			player.setFire(10);
 		}else if(i == 9){
-			world.spawnEntityInWorld(new EntityCreeper(world));
+			EntityCreeper creeper = new EntityCreeper(world);
+			creeper.setPosition(x, y + 1, z);
+			world.spawnEntityInWorld(creeper);
+			player.addChatComponentMessage(new ChatComponentText("test_creeper"));
 		}else if(i == 10){
-			world.setBlock(x, y, z, Blocks.lava);
+			EntityWither wither = new EntityWither(world);
+			wither.setPosition(x, y + 5, z);
+			world.spawnEntityInWorld(wither);
 		}else if(i == 11){
 			player.addPotionEffect(new PotionEffect(9, 600));
 		}else if(i == 12){
 			player.destroyCurrentEquippedItem();
+		}
+		if(i == 1 || i == 2){
+			soundHandler.playSound("boneyScream", world, player, 1, 1);
+		}else{
+			soundHandler.playSound("bleep", world, player, 1, 1);
 		}
 	}
 	
@@ -140,6 +176,6 @@ public class TileEntitySpinny extends TileEntity {
 	}
 
 	public float getBobPos() {
-		return 6 -Math.abs((float)Math.sin(bobpos) * 5.5F);
+		return -4 -Math.abs((float)Math.sin(bobpos) * 5.5F);
 	}
 }

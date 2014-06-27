@@ -12,7 +12,7 @@ public class modelSpinny extends ModelBase{
 	private ModelRenderer mainTwistPart;
 	private ModelRenderer centerPart;
 	
-	public void odelSpinny(){
+	public modelSpinny(){
 		parts = new ArrayList<ModelRenderer>();
 		textureHeight = textureWidth = 128;
 		
@@ -79,7 +79,7 @@ public class modelSpinny extends ModelBase{
 		parts.add(base2);
 	}
 	
-	public modelSpinny(){
+	public modelSpinny(boolean n){
 		parts = new ArrayList<ModelRenderer>();
 		sides = new ArrayList<ModelRenderer>();
 		textureHeight = textureWidth = 128;
@@ -202,8 +202,8 @@ public class modelSpinny extends ModelBase{
 	
 	public void RenderTile(TileEntitySpinny spinny, float rotation, float pos, float a, float b, float c, float mult){
 		
-		centerPart.rotateAngleY = spinny.getRotation();
-		centerPart.rotationPointY = spinny.getBobPos();
+		mainTwistPart.rotateAngleY = spinny.getRotation();
+		mainTwistPart.rotationPointY = spinny.getBobPos();
 		
 		for(ModelRenderer part : parts){
 			part.render(mult);
