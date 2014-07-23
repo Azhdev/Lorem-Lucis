@@ -6,12 +6,15 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import nl.Azhdev.non.blocks.TileEntities.TileEntitySpinny;
 import nl.Azhdev.non.handlers.soundHandler;
+import nl.Azhdev.non.items.nonItems;
 
 public class blockSpinny extends Block implements ITileEntityProvider{
 
@@ -20,7 +23,7 @@ public class blockSpinny extends Block implements ITileEntityProvider{
 		setBlockName("spinny");
 		setCreativeTab(CreativeTabs.tabBlock);
 		setBlockTextureName("non:spinny");
-		setBlockBounds(0.2F, 0, 0.2F, 0.8F, 0.2F, 0.8F);
+		setBlockBounds(0, 0, 0, 1, 2, 1);
 	}
 
 	@Override
@@ -39,23 +42,33 @@ public class blockSpinny extends Block implements ITileEntityProvider{
 	}
 	
 	@Override
-	public boolean onBlockActivated(World world, int x,	int y, int z, EntityPlayer player, int p_149727_6_,
-			float hitx, float hity, float hitz) {
-		
+	public boolean onBlockActivated(World world, int x,	int y, int z, EntityPlayer player, int p_149727_6_, float hitx, float hity, float hitz) {
 		if(!world.isRemote){
 			TileEntitySpinny s = (TileEntitySpinny)world.getTileEntity(x, y, z);
-			if(!s.isActivated()){
-				s.performRandomEffect(world, x, y, z, player);
-				s.activate();
-				return true;
+			if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == nonItems.upgrade){
+				if(!s.isOP){
+					s.setOP();
+					s.shouldCount = true;
+					player.getCurrentEquippedItem().stackSize--;
+					soundHandler.playSound("upgrade", world, player, 1, 1);
+				}
+				
 			}else{
-				return false;
+				if(s.canUse){
+					s.performRandomEffect(world, x, y, z, player);
+				}
 			}
-		}else{
-			return false;
 		}
-		
-		
+		return true;
+	}
+	
+	@Override
+	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity ent){
+		if(ent instanceof EntityArrow){
+			if(ent.isBurning()){
+				world.createExplosion(null, x, y, z, 4, true);
+			}
+		}
 	}
 	
 	@Override

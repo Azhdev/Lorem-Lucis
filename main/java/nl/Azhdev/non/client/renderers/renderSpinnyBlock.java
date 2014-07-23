@@ -16,17 +16,26 @@ import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class renderSpinnyBlock extends TileEntitySpecialRenderer implements ISimpleBlockRenderingHandler{
 
-	private modelSpinny model;
+	private static modelSpinny model;
 	
 	public renderSpinnyBlock(modelSpinny model, boolean d){
 		this.model = model;
 	}
 	
-	private static final ResourceLocation texture = new ResourceLocation("non", "textures/models/spinny.png");
+	private static ResourceLocation texture = new ResourceLocation("non", "textures/models/spinny.png");
 	private static final ResourceLocation texture_new = new ResourceLocation("non", "textures/models/spinny_new2.png");
+	/**
+	public static void refresh(TileEntity ent, int x, int y, int z){
+		TileEntitySpinny spinny = (TileEntitySpinny)ent;
+		if(spinny.shine){
+			texture = texture_new;
+		}else{
+			texture = new ResourceLocation("non", "textures/models/spinny.png");
+		}
+		renderTileEntity(ent, x, y, z);
+	}
 	
-	@Override
-	public void renderTileEntityAt(TileEntity var1, double x, double y, double z, float var8) {
+	public static void renderTileEntity(TileEntity var1, double x, double y, double z) {
 		TileEntitySpinny spinny = (TileEntitySpinny)var1;
 		GL11.glPushMatrix();
 		
@@ -40,7 +49,7 @@ public class renderSpinnyBlock extends TileEntitySpecialRenderer implements ISim
 		model.RenderTile(spinny, 0, 0, 0, 0, 0, 0.125F);
 		
 		GL11.glPopMatrix();
-	}
+	}*/
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {
@@ -67,5 +76,18 @@ public class renderSpinnyBlock extends TileEntitySpecialRenderer implements ISim
 	@Override
 	public int getRenderId() {
 		return -1;
+	}
+
+	@Override
+	public void renderTileEntityAt(TileEntity var1, double x, double y, double z, float var8) {
+		TileEntitySpinny spinny = (TileEntitySpinny)var1;
+		GL11.glPushMatrix();
+		
+		GL11.glTranslatef((float)x + 0.5F, (float)y + 1.5F, (float)z + 0.5F);
+		GL11.glScalef(0.5F, 0.5F, 0.5F);
+		Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
+		model.RenderTile(spinny, 0, 0, 0, 0, 0, 0.125F);
+		
+		GL11.glPopMatrix();
 	}
 }

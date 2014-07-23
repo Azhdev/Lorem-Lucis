@@ -22,22 +22,33 @@ public class TileEntitySpinny extends TileEntity {
 	private boolean isActivated = false;
 	Random random = new Random();
 	public boolean shine;
+	private boolean first = true;
+	public boolean isOP = false;
+	private int cooldown = 0;
+	public boolean canUse = true;
+	public boolean shouldCount = false;
 	
 	
 	@Override
 	public void updateEntity(){
 		if(worldObj.isRemote){
-			if(!isActivated()){
-				rotation += 0.01F;
-				bobpos += 0.02F;
-			}else{
-				rotation = 0;
-				bobpos = 0;
-			}
+			rotation += 0.01F;
+			bobpos += 0.02F;
 			
 		}else{
-			refreshTexture();
-		}	
+			if(isOP){
+				if(shouldCount){
+					if(cooldown < 1200){
+						cooldown++;
+					}else{
+						cooldown = 0;
+						shouldCount = false;
+						canUse = true;
+					}
+				}
+			}
+			//refreshTexture();
+		}
 	}
 	
 	private void refreshTexture() {
@@ -54,6 +65,9 @@ public class TileEntitySpinny extends TileEntity {
 		compound.setFloat("rotation", rotation);
 		compound.setFloat("bobpos", bobpos);
 		compound.setBoolean("activated", isActivated);
+		compound.setBoolean("isOP", isOP);
+		compound.setInteger("cooldown", cooldown);
+		compound.setBoolean("canUse", canUse);
 	}
 	
 	@Override
@@ -62,21 +76,26 @@ public class TileEntitySpinny extends TileEntity {
 		rotation = compound.getFloat("rotation");
 		bobpos = compound.getFloat("bobpos");
 		isActivated = compound.getBoolean("activated");
-	}
-
-	public void activate(){
-		isActivated = true;
+		isOP = compound.getBoolean("isOP");
+		cooldown = compound.getInteger("cooldown");
+		canUse = compound.getBoolean("canUse");
 	}
 	
-	public boolean isActivated(){
-		return isActivated;
+	public void setOP(){
+		isOP = true;
 	}
 	
 	public void performRandomEffect(World world, int x, int y, int z, EntityPlayer player) {
-		if(random.nextBoolean()){
-			performPositiveEffect(world, x, y, z, player);
-		}else{
-			performNegativeEffect(world, x, y, z, player);
+		if(canUse){
+			if(random.nextBoolean()){
+				performPositiveEffect(world, x, y, z, player);
+			}else{
+				performNegativeEffect(world, x, y, z, player);
+			}
+			if(isOP){
+				shouldCount = true;
+			}
+			canUse = false;
 		}
 	}
 
@@ -154,7 +173,6 @@ public class TileEntitySpinny extends TileEntity {
 			EntityCreeper creeper = new EntityCreeper(world);
 			creeper.setPosition(x, y + 1, z);
 			world.spawnEntityInWorld(creeper);
-			player.addChatComponentMessage(new ChatComponentText("test_creeper"));
 		}else if(i == 10){
 			EntityWither wither = new EntityWither(world);
 			wither.setPosition(x, y + 5, z);

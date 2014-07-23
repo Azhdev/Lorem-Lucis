@@ -1,4 +1,5 @@
 {
 	"boneyScream": {"catagory": "master","sounds": [{"name": "scream","stream": false}]},
-	"bleep": {"catagory": "master","sounds": [{"name": "bleep-sortoff","stream": false}]}
+	"bleep": {"catagory": "master","sounds": [{"name": "bleep-sortoff","stream": false}]},
+	"upgrade": {"catagory": "master","sounds": [{"name": "Upgrade","stream": false}]}
 }
