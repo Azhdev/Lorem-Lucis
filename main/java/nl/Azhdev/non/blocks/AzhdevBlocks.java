@@ -7,12 +7,15 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class AzhdevBlocks {
 	public static Block spinny;
+	public static Block invisiBlock;
 	
 	public static void initBlocks(){
 		spinny = new blockSpinny(Material.iron);
 		GameRegistry.registerBlock(spinny, "spinny");
 		
-	
+		invisiBlock = new invBlock(Material.iron);
+		GameRegistry.registerBlock(invisiBlock, "invisiBlock");
+		
 	}
 	
 	public static void intTileEntities(){

@@ -11,6 +11,6 @@
   "credits": "",
   "logoFile": "/assets/non/logo.png",
   "screenshots": [],
-  "dependencies": []
+  "dependencies": ['AzhdeCore']
 }
 ]

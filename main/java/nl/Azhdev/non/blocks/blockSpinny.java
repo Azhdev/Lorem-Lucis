@@ -12,8 +12,9 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import nl.Azhdev.core.api.packet.NetworkHandler;
+import nl.Azhdev.core.api.packet.PacketPlaySound;
 import nl.Azhdev.non.blocks.TileEntities.TileEntitySpinny;
-import nl.Azhdev.non.handlers.soundHandler;
 import nl.Azhdev.non.items.nonItems;
 
 public class blockSpinny extends Block implements ITileEntityProvider{
@@ -23,7 +24,6 @@ public class blockSpinny extends Block implements ITileEntityProvider{
 		setBlockName("spinny");
 		setCreativeTab(CreativeTabs.tabBlock);
 		setBlockTextureName("non:spinny");
-		setBlockBounds(0, 0, 0, 1, 2, 1);
 	}
 
 	@Override
@@ -42,6 +42,11 @@ public class blockSpinny extends Block implements ITileEntityProvider{
 	}
 	
 	@Override
+	public void onBlockAdded(World world, int x, int y, int z){
+		world.setBlock(x, y + 1, z, AzhdevBlocks.invisiBlock);
+	}
+	
+	@Override
 	public boolean onBlockActivated(World world, int x,	int y, int z, EntityPlayer player, int p_149727_6_, float hitx, float hity, float hitz) {
 		if(!world.isRemote){
 			TileEntitySpinny s = (TileEntitySpinny)world.getTileEntity(x, y, z);
@@ -50,7 +55,7 @@ public class blockSpinny extends Block implements ITileEntityProvider{
 					s.setOP();
 					s.shouldCount = true;
 					player.getCurrentEquippedItem().stackSize--;
-					soundHandler.playSound("upgrade", world, player, 1, 1);
+					NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("non:upgrade", x, y, z, 1, 1));
 				}
 				
 			}else{
@@ -70,7 +75,7 @@ public class blockSpinny extends Block implements ITileEntityProvider{
 			}
 		}
 	}
-	
+	 
 	@Override
 	public Item getItemDropped(int i, Random random, int j){
 		return null;
@@ -84,4 +89,9 @@ public class blockSpinny extends Block implements ITileEntityProvider{
 	public int getRenderType(){
         return -1;
     }
+	
+	@Override
+	public void breakBlock(World p_149749_1_, int x, int y, int z, Block p_149749_5_, int p_149749_6_){
+		p_149749_1_.setBlockToAir(x, y + 1, z);
+	}
 }

@@ -12,8 +12,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
-import nl.Azhdev.non.client.renderers.renderSpinnyBlock;
-import nl.Azhdev.non.handlers.soundHandler;
+import nl.Azhdev.core.api.packet.NetworkHandler;
+import nl.Azhdev.core.api.packet.PacketPlaySound;
 
 public class TileEntitySpinny extends TileEntity {
 
@@ -27,6 +27,7 @@ public class TileEntitySpinny extends TileEntity {
 	private int cooldown = 0;
 	public boolean canUse = true;
 	public boolean shouldCount = false;
+	private EntityPlayer player;
 	
 	
 	@Override
@@ -40,6 +41,8 @@ public class TileEntitySpinny extends TileEntity {
 				if(shouldCount){
 					if(cooldown < 1200){
 						cooldown++;
+						String n = "" + cooldown;
+						player.addChatComponentMessage(new ChatComponentText(n));
 					}else{
 						cooldown = 0;
 						shouldCount = false;
@@ -86,17 +89,19 @@ public class TileEntitySpinny extends TileEntity {
 	}
 	
 	public void performRandomEffect(World world, int x, int y, int z, EntityPlayer player) {
-		if(canUse){
+		if(canUse){				
+			this.player = player;
 			if(random.nextBoolean()){
 				performPositiveEffect(world, x, y, z, player);
 			}else{
 				performNegativeEffect(world, x, y, z, player);
 			}
-			if(isOP){
-				shouldCount = true;
-			}
-			canUse = false;
 		}
+		if(isOP){
+			shouldCount = true;
+		}
+		canUse = false;
+		
 	}
 
 	private void performPositiveEffect(World world, int x, int y, int z, EntityPlayer player){
@@ -137,7 +142,7 @@ public class TileEntitySpinny extends TileEntity {
 		}else if(i == 12){
 			world.setBlock(x, y + 2, z, Blocks.jukebox);
 		}
-		soundHandler.playSound("bleep", world, player, 1, 1);
+		NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("non:bleep", xCoord, yCoord, zCoord, 1.0F, 1.0F));
 }
 	
 	
@@ -183,9 +188,9 @@ public class TileEntitySpinny extends TileEntity {
 			player.destroyCurrentEquippedItem();
 		}
 		if(i == 1 || i == 2){
-			soundHandler.playSound("boneyScream", world, player, 1, 1);
+			NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("non:boneyScream", xCoord, yCoord, zCoord, 1, 1));
 		}else{
-			soundHandler.playSound("bleep", world, player, 1, 1);
+			NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("non:bleep", xCoord, yCoord, zCoord, 1.0F, 1.0F));
 		}
 	}
 	
