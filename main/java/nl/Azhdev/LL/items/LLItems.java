@@ -1,10 +1,9 @@
-package nl.Azhdev.non.items;
+package nl.Azhdev.LL.items;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
-import nl.Azhdev.non.blocks.AzhdevBlocks;
 
-public class nonItems {
+public class LLItems {
 	public static Item upgrade;
 	public static Item staff;
 	public static Item debug;
@@ -15,8 +14,5 @@ public class nonItems {
 		
 		staff = new Staff();
 		GameRegistry.registerItem(staff, "azhdev.staff");
-		
-		debug = new debugItem();
-		GameRegistry.registerItem(debug, "debugitem");
 	}
 }

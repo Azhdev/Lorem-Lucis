@@ -1,6 +1,4 @@
-package nl.Azhdev.non.blocks.TileEntities;
-
-import java.util.Random;
+package nl.Azhdev.LL.blocks.TileEntities;
 
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -14,6 +12,8 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import nl.Azhdev.core.api.packet.NetworkHandler;
 import nl.Azhdev.core.api.packet.PacketPlaySound;
+
+import java.util.Random;
 
 public class TileEntitySpinny extends TileEntity {
 
@@ -41,8 +41,8 @@ public class TileEntitySpinny extends TileEntity {
 				if(shouldCount){
 					if(cooldown < 1200){
 						cooldown++;
-						String n = "" + cooldown;
-						player.addChatComponentMessage(new ChatComponentText(n));
+						//String n = "" + cooldown;
+						//player.addChatComponentMessage(new ChatComponentText(n));
 					}else{
 						cooldown = 0;
 						shouldCount = false;
@@ -142,7 +142,7 @@ public class TileEntitySpinny extends TileEntity {
 		}else if(i == 12){
 			world.setBlock(x, y + 2, z, Blocks.jukebox);
 		}
-		NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("non:bleep", xCoord, yCoord, zCoord, 1.0F, 1.0F));
+		NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("LL:bleep", xCoord, yCoord, zCoord, 1.0F, 1.0F));
 }
 	
 	
@@ -188,9 +188,9 @@ public class TileEntitySpinny extends TileEntity {
 			player.destroyCurrentEquippedItem();
 		}
 		if(i == 1 || i == 2){
-			NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("non:boneyScream", xCoord, yCoord, zCoord, 1, 1));
+			NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("LL:boneyScream", xCoord, yCoord, zCoord, 1, 1));
 		}else{
-			NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("non:bleep", xCoord, yCoord, zCoord, 1.0F, 1.0F));
+			NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("LL:bleep", xCoord, yCoord, zCoord, 1.0F, 1.0F));
 		}
 	}
 	

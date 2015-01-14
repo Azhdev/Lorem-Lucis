@@ -1,10 +1,9 @@
-package nl.Azhdev.non.blocks;
+package nl.Azhdev.LL.blocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
@@ -12,8 +11,7 @@ public class invBlock extends Block {
 
 	public invBlock(Material p_i45394_1_) {
 		super(p_i45394_1_);
-		setCreativeTab(CreativeTabs.tabBlock);
-		setBlockTextureName("non:spinny");
+		setBlockTextureName("LL:spinny");
 		setBlockName("spinny");
 	}
 	

@@ -9,8 +9,8 @@
   "updateUrl": "",
   "authorList": ['Azhdev'],
   "credits": "",
-  "logoFile": "/assets/non/logo.png",
+  "logoFile": "/assets/ll/logo.png",
   "screenshots": [],
-  "dependencies": ['AzhdeCore']
+  "dependencies": ['AzhdevCore']
 }
 ]

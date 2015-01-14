@@ -1,13 +1,10 @@
-package nl.Azhdev.non.items;
+package nl.Azhdev.LL.items;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 public class Staff extends Item {
@@ -15,8 +12,8 @@ public class Staff extends Item {
 	public Staff(){
 		super();
 		setUnlocalizedName("azhdev.Staff");
-		setCreativeTab(CreativeTabs.tabMisc);
-		setTextureName("non:Staff");
+		//setCreativeTab(CreativeTabs.tabMisc);
+		setTextureName("LL:Staff");
 	}
 	
 	@Override

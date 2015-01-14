@@ -1,10 +1,10 @@
-package nl.Azhdev.non.client.models;
-
-import java.util.ArrayList;
+package nl.Azhdev.LL.client.models;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import nl.Azhdev.non.blocks.TileEntities.TileEntitySpinny;
+import nl.Azhdev.LL.blocks.TileEntities.TileEntitySpinny;
+
+import java.util.ArrayList;
 
 public class modelSpinny extends ModelBase{
 	private ArrayList<ModelRenderer> parts;

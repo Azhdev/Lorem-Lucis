@@ -1,11 +1,11 @@
-package nl.Azhdev.non;
+package nl.Azhdev.LL;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import nl.Azhdev.non.blocks.AzhdevBlocks;
-import nl.Azhdev.non.handlers.generationHandler;
-import nl.Azhdev.non.items.nonItems;
-import nl.Azhdev.non.proxies.commonProxy;
+import nl.Azhdev.LL.blocks.AzhdevBlocks;
+import nl.Azhdev.LL.handlers.generationHandler;
+import nl.Azhdev.LL.items.LLItems;
+import nl.Azhdev.LL.proxies.commonProxy;
 import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -15,15 +15,16 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import nl.Azhdev.LL.reference.Reference;
 
 
-@Mod(modid = "LL", name = "Lorem Lucis", version = "1.7.10-2.2")
-public class nonameClass {
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = Reference.DEPENDENCIES)
+public class LoremLucis {
+
+	@Instance(Reference.MOD_ID)
+	public static LoremLucis instance;
 	
-	@Instance("LL")
-	public static nonameClass instance;
-	
-	@SidedProxy(clientSide = "nl.Azhdev.non.proxies.ClientProxy", serverSide = "nl.Azhdev.non.proxies.commonProxy")
+	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
 	public static commonProxy proxy;
 	
 	IWorldGenerator gen = new generationHandler();
@@ -32,14 +33,14 @@ public class nonameClass {
 	public void Preinit(FMLPreInitializationEvent event){
 		AzhdevBlocks.initBlocks();
 		AzhdevBlocks.intTileEntities();
-		nonItems.init();
+		LLItems.init();
 		proxy.initRendering();
 		GameRegistry.registerWorldGenerator(gen, 1);
 	}
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event){
-		GameRegistry.addRecipe(new ItemStack(nonItems.upgrade), new Object[]{" I ", "INI", " I ", 'N', Items.nether_star, 'I', Items.iron_ingot});
+		GameRegistry.addRecipe(new ItemStack(LLItems.upgrade), new Object[]{" I ", "INI", " I ", 'N', Items.nether_star, 'I', Items.iron_ingot});
 	}
 	
 	@EventHandler

@@ -1,6 +1,4 @@
-package nl.Azhdev.non.blocks;
-
-import java.util.Random;
+package nl.Azhdev.LL.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -14,8 +12,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import nl.Azhdev.core.api.packet.NetworkHandler;
 import nl.Azhdev.core.api.packet.PacketPlaySound;
-import nl.Azhdev.non.blocks.TileEntities.TileEntitySpinny;
-import nl.Azhdev.non.items.nonItems;
+import nl.Azhdev.LL.blocks.TileEntities.TileEntitySpinny;
+import nl.Azhdev.LL.items.LLItems;
+
+import java.util.Random;
 
 public class blockSpinny extends Block implements ITileEntityProvider{
 
@@ -23,7 +23,7 @@ public class blockSpinny extends Block implements ITileEntityProvider{
 		super(mat);
 		setBlockName("spinny");
 		setCreativeTab(CreativeTabs.tabBlock);
-		setBlockTextureName("non:spinny");
+		setBlockTextureName("LL:spinny");
 	}
 
 	@Override
@@ -50,12 +50,12 @@ public class blockSpinny extends Block implements ITileEntityProvider{
 	public boolean onBlockActivated(World world, int x,	int y, int z, EntityPlayer player, int p_149727_6_, float hitx, float hity, float hitz) {
 		if(!world.isRemote){
 			TileEntitySpinny s = (TileEntitySpinny)world.getTileEntity(x, y, z);
-			if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == nonItems.upgrade){
+			if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == LLItems.upgrade){
 				if(!s.isOP){
 					s.setOP();
 					s.shouldCount = true;
 					player.getCurrentEquippedItem().stackSize--;
-					NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("non:upgrade", x, y, z, 1, 1));
+					NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("LL:upgrade", x, y, z, 1, 1));
 				}
 				
 			}else{
