@@ -1,8 +1,8 @@
-package nl.Azhdev.non.proxies;
+package nl.Azhdev.LL.proxies;
 
-import nl.Azhdev.non.blocks.TileEntities.TileEntitySpinny;
-import nl.Azhdev.non.client.models.modelSpinny;
-import nl.Azhdev.non.client.renderers.renderSpinnyBlock;
+import nl.Azhdev.LL.blocks.TileEntities.TileEntitySpinny;
+import nl.Azhdev.LL.client.models.modelSpinny;
+import nl.Azhdev.LL.client.renderers.renderSpinnyBlock;
 import cpw.mods.fml.client.registry.ClientRegistry;
 
 public class ClientProxy extends commonProxy{

@@ -1,4 +1,4 @@
-package nl.Azhdev.non.client.renderers;
+package nl.Azhdev.LL.client.renderers;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -7,8 +7,8 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
-import nl.Azhdev.non.blocks.TileEntities.TileEntitySpinny;
-import nl.Azhdev.non.client.models.modelSpinny;
+import nl.Azhdev.LL.blocks.TileEntities.TileEntitySpinny;
+import nl.Azhdev.LL.client.models.modelSpinny;
 
 import org.lwjgl.opengl.GL11;
 
@@ -22,15 +22,15 @@ public class renderSpinnyBlock extends TileEntitySpecialRenderer implements ISim
 		this.model = model;
 	}
 	
-	private static ResourceLocation texture = new ResourceLocation("non", "textures/models/spinny.png");
-	private static final ResourceLocation texture_new = new ResourceLocation("non", "textures/models/spinny_new2.png");
+	private static ResourceLocation texture = new ResourceLocation("ll", "textures/models/spinny.png");
+	private static final ResourceLocation texture_new = new ResourceLocation("LL", "textures/models/spinny_new2.png");
 	/**
 	public static void refresh(TileEntity ent, int x, int y, int z){
 		TileEntitySpinny spinny = (TileEntitySpinny)ent;
 		if(spinny.shine){
 			texture = texture_new;
 		}else{
-			texture = new ResourceLocation("non", "textures/models/spinny.png");
+			texture = new ResourceLocation("LL", "textures/models/spinny.png");
 		}
 		renderTileEntity(ent, x, y, z);
 	}

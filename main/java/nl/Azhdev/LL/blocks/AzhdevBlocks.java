@@ -1,8 +1,8 @@
-package nl.Azhdev.non.blocks;
+package nl.Azhdev.LL.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import nl.Azhdev.non.blocks.TileEntities.TileEntitySpinny;
+import nl.Azhdev.LL.blocks.TileEntities.TileEntitySpinny;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class AzhdevBlocks {

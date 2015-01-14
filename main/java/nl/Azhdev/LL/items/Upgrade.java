@@ -1,4 +1,4 @@
-package nl.Azhdev.non.items;
+package nl.Azhdev.LL.items;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -8,6 +8,6 @@ public class Upgrade extends Item {
 		super();
 		setUnlocalizedName("azhdev.upgrade");
 		setCreativeTab(CreativeTabs.tabMisc);
-		setTextureName("non:upgrade");
+		setTextureName("LL:upgrade");
 	}
 }
