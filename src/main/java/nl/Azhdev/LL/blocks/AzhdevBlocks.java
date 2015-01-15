@@ -3,7 +3,7 @@ package nl.Azhdev.LL.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import nl.Azhdev.LL.blocks.TileEntities.TileEntitySpinny;
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class AzhdevBlocks {
 	public static Block spinny;

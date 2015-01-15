@@ -1,18 +1,17 @@
 package nl.Azhdev.core.api.packet;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.block.Block;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public abstract class LocationIntPacket<REQ extends IMessage> extends AbstractPacket<REQ>{
+public abstract class LocationDoublePacket<REQ extends IMessage> extends AbstractPacket<REQ> {
 	
-	protected int x, y, z;
+	protected double x, y, z;
 	
-	public LocationIntPacket(){}
+	public LocationDoublePacket(){}
 	
-	public LocationIntPacket(int x, int y, int z){
+	public LocationDoublePacket(double x, double y, double z){
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -20,16 +19,16 @@ public abstract class LocationIntPacket<REQ extends IMessage> extends AbstractPa
 	
 	@Override
 	public void toBytes(ByteBuf buf){
-		buf.writeInt(x);
-		buf.writeInt(y);
-		buf.writeInt(z);
+		buf.writeDouble(x);
+		buf.writeDouble(y);
+		buf.writeDouble(z);		
 	}
 	
 	@Override
 	public void fromBytes(ByteBuf buf){
-		x = buf.readInt();
-		y = buf.readInt();
-		z = buf.readInt();
+		x = buf.readDouble();
+		y = buf.readDouble();
+		z = buf.readDouble();
 	}
 	
 	public NetworkRegistry.TargetPoint getTargetPoint(World world){
@@ -38,9 +37,5 @@ public abstract class LocationIntPacket<REQ extends IMessage> extends AbstractPa
 	
 	public NetworkRegistry.TargetPoint getTargetPoint(World world, double updateDistance){
 		return new NetworkRegistry.TargetPoint(world.provider.dimensionId, x, y, z, updateDistance);
-	}
-	
-	protected Block getBlock(World world){
-		return world.getBlock(x, y, z);
 	}
 }

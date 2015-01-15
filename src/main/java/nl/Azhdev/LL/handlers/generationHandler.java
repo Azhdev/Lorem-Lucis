@@ -1,6 +1,6 @@
 package nl.Azhdev.LL.handlers;
 
-import cpw.mods.fml.common.IWorldGenerator;
+import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import nl.Azhdev.LL.blocks.AzhdevBlocks;

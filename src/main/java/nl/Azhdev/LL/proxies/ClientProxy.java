@@ -3,7 +3,7 @@ package nl.Azhdev.LL.proxies;
 import nl.Azhdev.LL.blocks.TileEntities.TileEntitySpinny;
 import nl.Azhdev.LL.client.models.modelSpinny;
 import nl.Azhdev.LL.client.renderers.renderSpinnyBlock;
-import cpw.mods.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 public class ClientProxy extends commonProxy{
 	

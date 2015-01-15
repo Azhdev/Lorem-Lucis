@@ -2,7 +2,7 @@ package nl.Azhdev.core.api.packet;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
-import cpw.mods.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 public class PacketPlaySound extends LocationDoublePacket<PacketPlaySound>{
 

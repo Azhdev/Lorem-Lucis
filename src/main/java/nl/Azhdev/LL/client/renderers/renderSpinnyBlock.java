@@ -2,7 +2,6 @@ package nl.Azhdev.LL.client.renderers;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -11,8 +10,6 @@ import nl.Azhdev.LL.blocks.TileEntities.TileEntitySpinny;
 import nl.Azhdev.LL.client.models.modelSpinny;
 
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class renderSpinnyBlock extends TileEntitySpecialRenderer implements ISimpleBlockRenderingHandler{
 
