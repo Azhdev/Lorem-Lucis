@@ -1,10 +1,11 @@
 package nl.Azhdev.LL.items;
 
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 public class Staff extends Item {
@@ -13,72 +14,41 @@ public class Staff extends Item {
 		super();
 		setUnlocalizedName("azhdev.Staff");
 		//setCreativeTab(CreativeTabs.tabMisc);
-		setTextureName("LL:Staff");
 	}
 	
 	@Override
-	public boolean onItemUse(ItemStack p_77648_1_, EntityPlayer p_77648_2_, World p_77648_3_, int p_77648_4_, int p_77648_5_, int p_77648_6_, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_)
+	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        if (p_77648_3_.isRemote)
+        if (worldIn.isRemote)
         {
             return true;
         }
         else
         {
-            if (p_77648_7_ == 0)
-            {
-                --p_77648_5_;
-            }
+            pos = pos.offset(side);
+        }
 
-            if (p_77648_7_ == 1)
-            {
-                ++p_77648_5_;
-            }
-
-            if (p_77648_7_ == 2)
-            {
-                --p_77648_6_;
-            }
-
-            if (p_77648_7_ == 3)
-            {
-                ++p_77648_6_;
-            }
-
-            if (p_77648_7_ == 4)
-            {
-                --p_77648_4_;
-            }
-
-            if (p_77648_7_ == 5)
-            {
-                ++p_77648_4_;
-            }
-
-            if (!p_77648_2_.canPlayerEdit(p_77648_4_, p_77648_5_, p_77648_6_, p_77648_7_, p_77648_1_))
-            {
-                return false;
-            }
-            else
-            {
-                if (p_77648_3_.getBlock(p_77648_4_, p_77648_5_, p_77648_6_).getMaterial() == Material.air)
-                {
-                    p_77648_3_.playSoundEffect((double)p_77648_4_ + 0.5D, (double)p_77648_5_ + 0.5D, (double)p_77648_6_ + 0.5D, "fire.ignite", 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
-                    for(int i = -5; i == 5; i++){
-                    	for(int j = -5; j == 5; j++){
-                    		p_77648_3_.setBlock(p_77648_4_ + i, p_77648_5_, p_77648_6_ + j, Blocks.fire);
-                    	}
+        if (!playerIn.canPlayerEdit(pos, side, stack))
+        {
+            return false;
+        }
+        else
+        {
+            if (worldIn.isAirBlock(pos)) {
+                worldIn.playSoundEffect((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, "fire.ignite", 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
+                for (int i = -5; i == 5; i++) {
+                    for (int j = -5; j == 5; j++) {
+                        worldIn.setBlockState(pos, Blocks.fire.getDefaultState());
                     }
-                    p_77648_3_.setBlock(p_77648_4_, p_77648_5_, p_77648_6_, Blocks.fire);
                 }
+                worldIn.setBlockState(pos, Blocks.fire.getDefaultState());
+            }
 
-                if (!p_77648_2_.capabilities.isCreativeMode)
-                {
-                    --p_77648_1_.stackSize;
-                }
+            if (!playerIn.capabilities.isCreativeMode){
+                --stack.stackSize;
+            }
 
-                return true;
+            return true;
             }
         }
     }
-}
