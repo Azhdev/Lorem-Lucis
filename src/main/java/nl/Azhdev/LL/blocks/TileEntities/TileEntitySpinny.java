@@ -8,6 +8,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import nl.Azhdev.core.api.packet.NetworkHandler;
@@ -22,16 +23,14 @@ public class TileEntitySpinny extends TileEntity {
 	private boolean isActivated = false;
 	Random random = new Random();
 	public boolean shine;
-	private boolean first = true;
 	public boolean isOP = false;
 	private int cooldown = 0;
 	public boolean canUse = true;
 	public boolean shouldCount = false;
 	private EntityPlayer player;
 	
-	
 	@Override
-	public void updateEntity(){
+	public void updateContainingBlockInfo(){
 		if(worldObj.isRemote){
 			rotation += 0.01F;
 			bobpos += 0.02F;
@@ -47,18 +46,11 @@ public class TileEntitySpinny extends TileEntity {
 						cooldown = 0;
 						shouldCount = false;
 						canUse = true;
+						worldObj.setBlockToAir(getPos());
 					}
 				}
 			}
-			//refreshTexture();
-		}
-	}
-	
-	private void refreshTexture() {
-		if(worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) && worldObj.isDaytime()){
-			shine = true;
-		}else{
-			shine = false;
+			this.markDirty();
 		}
 	}
 
@@ -88,13 +80,13 @@ public class TileEntitySpinny extends TileEntity {
 		isOP = true;
 	}
 	
-	public void performRandomEffect(World world, int x, int y, int z, EntityPlayer player) {
+	public void performRandomEffect(World world, BlockPos pos, EntityPlayer player) {
 		if(canUse){				
 			this.player = player;
 			if(random.nextBoolean()){
-				performPositiveEffect(world, x, y, z, player);
+				performPositiveEffect(world, pos, player);
 			}else{
-				performNegativeEffect(world, x, y, z, player);
+				performNegativeEffect(world, pos, player);
 			}
 		}
 		if(isOP){
@@ -104,10 +96,10 @@ public class TileEntitySpinny extends TileEntity {
 		
 	}
 
-	private void performPositiveEffect(World world, int x, int y, int z, EntityPlayer player){
+	private void performPositiveEffect(World world, BlockPos pos, EntityPlayer player){
 		int i = random.nextInt(12);
 		if(i == 0){
-			world.setBlock(x, y + 2, z, Blocks.diamond_ore);
+			world.setBlockState(new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ()), Blocks.diamond_ore.getDefaultState());
 		}else if(i == 1){
 			if(player.getHealth() <= 10){
 				player.setHealth(16);
@@ -129,38 +121,38 @@ public class TileEntitySpinny extends TileEntity {
 			player.addPotionEffect(new PotionEffect(1, 200));
 		}else if(i == 7){
 			EntityPig pig = new EntityPig(world);
-			pig.setPosition(x, y+1, z);
+			pig.setPosition(pos.getX(), pos.getY() + 1, pos.getZ());
 			world.spawnEntityInWorld(pig);
 		}else if(i == 8){
 			player.addExperienceLevel(5);
 		}else if(i == 9){
 			player.addPotionEffect(new PotionEffect(3, 1200));
 		}else if(i == 10){
-			world.setBlock(x, y + 2, z, Blocks.mycelium);
+			world.setBlockState(new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ()), Blocks.mycelium.getDefaultState());
 		}else if(i ==11){
 			player.addExperience(50);
 		}else if(i == 12){
-			world.setBlock(x, y + 2, z, Blocks.jukebox);
+			world.setBlockState(new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ()), Blocks.jukebox.getDefaultState());
 		}
-		NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("LL:bleep", xCoord, yCoord, zCoord, 1.0F, 1.0F));
+		NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("LL:bleep", pos.getX(), pos.getY(), pos.getZ(), 1.0F, 1.0F));
 }
 	
 	
-	private void performNegativeEffect(World world, int x, int y, int z, EntityPlayer player){
+	private void performNegativeEffect(World world, BlockPos pos, EntityPlayer player){
 		int i = random.nextInt(12);
 		if(i == 1){
 			if(!player.capabilities.isCreativeMode){
 				player.setHealth(1);
 			}else{
-				player.addChatComponentMessage(new ChatComponentText("i was going to reduce your health but you're in creative mode :("));
+				player.addChatComponentMessage(new ChatComponentText("I was going to reduce your health but you're in creative mode :("));
 			}
 		}else if(i == 2){
 			if(!player.capabilities.isCreativeMode){
-				world.createExplosion(player, x, y, z, 4, true);
+				world.createExplosion(player, pos.getX(), pos.getY(), pos.getZ(), 4, true);
 				player.setHealth(0);
 				
 			}else{
-				player.addChatComponentMessage(new ChatComponentText("i was going to kill you but you're in creative mode :("));
+				player.addChatComponentMessage(new ChatComponentText("I was going to kill you but you're in creative mode :("));
 			}
 		}else if(i == 3){
 			player.addExhaustion(10);
@@ -176,11 +168,11 @@ public class TileEntitySpinny extends TileEntity {
 			player.setFire(10);
 		}else if(i == 9){
 			EntityCreeper creeper = new EntityCreeper(world);
-			creeper.setPosition(x, y + 1, z);
+			creeper.setPosition(pos.getX(), pos.getY() + 1, pos.getZ());
 			world.spawnEntityInWorld(creeper);
 		}else if(i == 10){
 			EntityWither wither = new EntityWither(world);
-			wither.setPosition(x, y + 5, z);
+			wither.setPosition(pos.getX(), pos.getY() + 5, pos.getZ());
 			world.spawnEntityInWorld(wither);
 		}else if(i == 11){
 			player.addPotionEffect(new PotionEffect(9, 600));
@@ -188,9 +180,9 @@ public class TileEntitySpinny extends TileEntity {
 			player.destroyCurrentEquippedItem();
 		}
 		if(i == 1 || i == 2){
-			NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("LL:boneyScream", xCoord, yCoord, zCoord, 1, 1));
+			NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("LL:boneyScream", pos.getX(), pos.getY(), pos.getZ(), 1, 1));
 		}else{
-			NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("LL:bleep", xCoord, yCoord, zCoord, 1.0F, 1.0F));
+			NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("LL:bleep", pos.getX(), pos.getY(), pos.getZ(), 1.0F, 1.0F));
 		}
 	}
 	

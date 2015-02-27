@@ -1,11 +1,12 @@
 package nl.Azhdev.LL.handlers;
 
-import net.minecraftforge.fml.common.IWorldGenerator;
+import java.util.Random;
+
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
-import nl.Azhdev.LL.blocks.AzhdevBlocks;
-
-import java.util.Random;
+import net.minecraftforge.fml.common.IWorldGenerator;
+import nl.Azhdev.LL.init.LLBlocks;
 
 public class generationHandler implements IWorldGenerator{
 
@@ -20,11 +21,11 @@ public class generationHandler implements IWorldGenerator{
 		int y = 256;
 		int z = chunkZ * random.nextInt(16);
 		
-		while(world.isAirBlock(x, y, z)){
+		while(world.isAirBlock(new BlockPos(x, y, z))){
 			y--;
 		}
 		if(random.nextInt(1000) <= 1){
-			world.setBlock(x, y, z, AzhdevBlocks.spinny);
+			world.setBlockState(new BlockPos(x, y, z), LLBlocks.Spinny.getDefaultState());
 		}
 
 	}

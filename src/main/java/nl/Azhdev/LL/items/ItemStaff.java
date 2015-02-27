@@ -8,16 +8,15 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-public class Staff extends Item {
-	
-	public Staff(){
-		super();
-		setUnlocalizedName("azhdev.Staff");
-		//setCreativeTab(CreativeTabs.tabMisc);
-	}
-	
-	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+public class ItemStaff extends SourceItem {
+
+    public ItemStaff(){ //TODO New texture. Was gonna add some fire particles, but i failed :3
+        super();
+        setUnlocalizedName("staff");
+    }
+
+    @Override
+    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         if (worldIn.isRemote)
         {
@@ -49,6 +48,6 @@ public class Staff extends Item {
             }
 
             return true;
-            }
         }
     }
+}

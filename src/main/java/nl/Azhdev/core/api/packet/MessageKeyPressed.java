@@ -3,14 +3,14 @@ package nl.Azhdev.core.api.packet;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
-import nl.Azhdev.core.api.util;
-import nl.Azhdev.core.api.keybindings.KeyBindings;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import nl.Azhdev.core.api.keybindings.KeyBindings;
+import nl.Azhdev.core.api.utilityclasses.Utilities;
 
 public class MessageKeyPressed implements IMessage, IMessageHandler<MessageKeyPressed, IMessage>{
 
@@ -35,7 +35,7 @@ public class MessageKeyPressed implements IMessage, IMessageHandler<MessageKeyPr
 		
 		if(player != null){
 			if(!player.worldObj.isRemote){
-				String n = util.getRandomSound();
+				String n = Utilities.getRandomSound();
 				NetworkHandler.sendToAll(new PacketPlaySound(n, player, 0.1F, 1));
 			}
 		}

@@ -3,13 +3,13 @@
   "modid": "LL",
   "name": "Lorum Lucis",
   "description": "Azhdev's modjam 4 entry",
-  "version": "1.7.10-2.1a",
-  "mcversion": "1.7.10",
+  "version": "1.8-2.3",
+  "mcversion": "1.8",
   "url": "",
   "updateUrl": "",
   "authorList": ['Azhdev'],
   "credits": "",
-  "logoFile": "/assets/ll/logo.png",
+  "logoFile": "/assets/LL/logo.png",
   "screenshots": [],
   "dependencies": ['AzhdevCore']
 }

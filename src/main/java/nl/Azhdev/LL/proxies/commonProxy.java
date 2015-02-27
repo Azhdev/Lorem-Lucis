@@ -1,7 +1,10 @@
 package nl.Azhdev.LL.proxies;
 
-public class commonProxy {
+public class CommonProxy {
 	public void initRendering(){
-		
 	}
+
+    public void registerRenders()
+    {
+    }
 }
