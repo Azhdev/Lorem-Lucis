@@ -1,10 +1,6 @@
 package nl.Azhdev.LL;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.Mod;
@@ -15,7 +11,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
 import nl.Azhdev.LL.init.LLBlocks;
 import nl.Azhdev.LL.handlers.generationHandler;
 import nl.Azhdev.LL.init.LLItems;
@@ -54,6 +49,5 @@ public class LoremLucis {
 	}
 }
 
-//TODO
-//Make BlockSpinny texture load in inventory and when hold
-//Make BlockSpinny spin again :3
+//TODO Make BlockSpinny spin again
+//TODO Fix SpinnyBlock break particles

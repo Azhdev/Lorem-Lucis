@@ -16,7 +16,6 @@ import nl.Azhdev.LL.init.LLBlocks;
 import nl.Azhdev.LL.init.LLItems;
 import nl.Azhdev.core.api.packet.NetworkHandler;
 import nl.Azhdev.core.api.packet.PacketPlaySound;
-import org.lwjgl.opengl.GL11;
 
 import java.util.Random;
 

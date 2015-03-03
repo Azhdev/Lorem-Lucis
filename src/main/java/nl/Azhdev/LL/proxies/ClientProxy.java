@@ -1,5 +1,8 @@
 package nl.Azhdev.LL.proxies;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.item.Item;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import nl.Azhdev.LL.blocks.TileEntities.TileEntitySpinny;
 import nl.Azhdev.LL.client.models.modelSpinny;
@@ -20,6 +23,6 @@ public class ClientProxy extends CommonProxy {
     	public void registerRenders()
     	{
             LLItems.registerRender();
-
+            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(LLBlocks.Spinny), 0, new ModelResourceLocation("ll:spinny", "inventory"));
         }
 }

@@ -2,15 +2,11 @@ package nl.Azhdev.LL.client.renderers;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import nl.Azhdev.LL.blocks.BlockSpinny;
 import nl.Azhdev.LL.blocks.TileEntities.TileEntitySpinny;
 import nl.Azhdev.LL.client.models.modelSpinny;
 
-import nl.Azhdev.LL.reference.Reference;
 import org.lwjgl.opengl.GL11;
 
 public class renderSpinnyBlock extends TileEntitySpecialRenderer{

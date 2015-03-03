@@ -3,9 +3,7 @@ package nl.Azhdev.LL.creativetab;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import nl.Azhdev.LL.init.LLBlocks;
-import nl.Azhdev.LL.init.LLItems;
 import nl.Azhdev.LL.reference.Reference;
-import sun.org.mozilla.javascript.internal.ast.Block;
 
 public class CreativeTab
 {
@@ -13,8 +11,8 @@ public class CreativeTab
     {
         public Item getTabIconItem()
         {
-            return LLItems.Upgrade;
-        } //return Item.getItemFromBlock(LLBlocks.spinny);
+            return Item.getItemFromBlock(LLBlocks.Spinny);
+        }
 
     };
 }

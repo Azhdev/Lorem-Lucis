@@ -1,7 +1,7 @@
 {
   "parent": "builtin/generated",
   "textures": {
-    "layer0": "ll:blocks/spinny"
+    "layer0": "ll:items/spinny"
   },
   "display": {
     "thirdperson": {

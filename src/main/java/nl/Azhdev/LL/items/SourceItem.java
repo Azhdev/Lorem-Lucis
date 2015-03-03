@@ -13,4 +13,16 @@ public class SourceItem extends Item
         this.setCreativeTab(CreativeTab.LL_TAB);
     }
 
+    @Override
+    public String getUnlocalizedName(ItemStack itemStack)
+    {
+        return String.format("item.%s%s", Reference.MOD_ID.toLowerCase() + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+    }
+
+
+    protected String getUnwrappedUnlocalizedName(String unlocalizedName)
+    {
+        return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
+    }
+
 }

@@ -2,7 +2,7 @@
 tile.ll:spinny.name=Spinny Block
 
 #Items
-item.upgrade.name=Upgrade
-item.staff.name=Staff
+item.ll:upgrade.name=Upgrade
+item.ll:staff.name=Staff
 
 itemGroup.ll=Lorem Lucis
