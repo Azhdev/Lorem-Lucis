@@ -1,0 +1,8 @@
+#Blocks
+tile.ll:spinny.name=Spinny Block
+
+#Items
+item.ll:upgrade.name=Upgrade
+item.ll:staff.name=Staff
+
+itemGroup.ll=Lorem Lucis

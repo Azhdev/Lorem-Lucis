@@ -1,0 +1,16 @@
+[
+{
+  "modid": "LL",
+  "name": "Lorum Lucis",
+  "description": "Azhdev's modjam 4 entry",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ['Azhdev'],
+  "credits": "",
+  "logoFile": "/assets/LL/logo.png",
+  "screenshots": [],
+  "dependencies": ['AzhdevCore']
+}
+]
