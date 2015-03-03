@@ -6,5 +6,5 @@ public class Reference {
     public static final String MOD_VERSION = "@VERSION@";
     public static final String CLIENT_PROXY_CLASS = "nl.Azhdev.LL.proxies.ClientProxy";
     public static final String SERVER_PROXY_CLASS = "nl.Azhdev.LL.proxies.commonProxy";
-    public static final String DEPENDENCIES = "required-after:Forge@[11.14.0.1299,);required-after:ACORE";
+    public static final String DEPENDENCIES = "required-after:Forge@[11.14.1.1334,);required-after:ACORE";
 }

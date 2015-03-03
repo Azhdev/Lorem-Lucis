@@ -23,7 +23,7 @@ if (System.getenv().BUILD_NUMBER) {
 }
 
 version = "${minecraft_version}-${mod_version}${buildnumber}"
-group = "nl.Azhdev.LL
+group = "nl.Azhdev.LL"
 archivesBaseName = "LL"
 
 minecraft {

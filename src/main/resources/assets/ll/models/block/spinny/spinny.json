@@ -1,0 +1,6 @@
+{
+  "parent": "spinny",
+  "textures": {
+    "all": "ll:blocks/spinny"
+  }
+}

@@ -51,3 +51,4 @@ public class LoremLucis {
 
 //TODO Make BlockSpinny spin again
 //TODO Fix SpinnyBlock break particles
+//TODO Look at ISmartItemModel and ISmartBlockModel
