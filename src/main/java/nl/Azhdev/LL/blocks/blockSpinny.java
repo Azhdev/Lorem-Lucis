@@ -25,7 +25,7 @@ public class blockSpinny extends SourceBlock implements ITileEntityProvider{
 
 	public blockSpinny(Material mat) {
 		super(mat);
-		
+		setUnlocalizedName("spinny");
 	}
 
 	@Override
