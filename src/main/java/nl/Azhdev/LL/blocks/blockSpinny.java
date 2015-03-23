@@ -11,6 +11,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import nl.Azhdev.LL.blocks.TileEntities.TileEntitySpinny;
 import nl.Azhdev.LL.init.LLBlocks;
 import nl.Azhdev.LL.init.LLItems;
@@ -19,11 +21,11 @@ import nl.Azhdev.core.api.packet.PacketPlaySound;
 
 import java.util.Random;
 
-public class BlockSpinny extends SourceBlock implements ITileEntityProvider{
+public class blockSpinny extends SourceBlock implements ITileEntityProvider{
 
-	public BlockSpinny(Material mat) {
+	public blockSpinny(Material mat) {
 		super(mat);
-		setUnlocalizedName("spinny");
+		
 	}
 
 	@Override
@@ -50,7 +52,7 @@ public class BlockSpinny extends SourceBlock implements ITileEntityProvider{
 					s.setOP();
 					s.shouldCount = true;
 					playerIn.getCurrentEquippedItem().stackSize--;
-					NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("LL:upgrade", pos.getX(), pos.getY(), pos.getZ(), 1, 1));
+					NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("LL:upgrade", pos.getX(), pos.getY(), pos.getZ(), 1, 1, worldIn));
 				}
 				
 			}else{
@@ -90,4 +92,11 @@ public class BlockSpinny extends SourceBlock implements ITileEntityProvider{
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state){
 		worldIn.setBlockToAir(new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ()));
 	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+    public boolean addDestroyEffects(World world, BlockPos pos, net.minecraft.client.particle.EffectRenderer effectRenderer){
+		NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound(this.stepSound.getBreakSound(), pos.getX(), pos.getY(), pos.getZ(), 1, 1, world));
+		return true;
+    }
 }

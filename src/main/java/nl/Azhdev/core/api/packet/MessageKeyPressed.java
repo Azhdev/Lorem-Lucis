@@ -36,7 +36,7 @@ public class MessageKeyPressed implements IMessage, IMessageHandler<MessageKeyPr
 		if(player != null){
 			if(!player.worldObj.isRemote){
 				String n = Utilities.getRandomSound();
-				NetworkHandler.sendToAll(new PacketPlaySound(n, player, 0.1F, 1));
+				NetworkHandler.sendToAll(new PacketPlaySound(n, player, 0.1F, 1, player.worldObj));
 			}
 		}
 		

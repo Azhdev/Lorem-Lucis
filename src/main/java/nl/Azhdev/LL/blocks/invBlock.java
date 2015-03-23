@@ -50,7 +50,7 @@ public class invBlock extends Block {
                     s.setOP();
                     s.shouldCount = true;
                     playerIn.getCurrentEquippedItem().stackSize--;
-                    NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("LL:upgrade", pos.getX(), pos.getY(), pos.getZ(), 1, 1));
+                    NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("LL:upgrade", pos.getX(), pos.getY(), pos.getZ(), 1, 1, worldIn));
                 }
 
             } else {
@@ -69,4 +69,11 @@ public class invBlock extends Block {
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state){
 		worldIn.setBlockToAir(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()));
 	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+    public boolean addDestroyEffects(World world, BlockPos pos, net.minecraft.client.particle.EffectRenderer effectRenderer){
+		NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound(this.stepSound.getBreakSound(), pos.getX(), pos.getY(), pos.getZ(), 1, 1, world));
+		return true;
+    }
 }

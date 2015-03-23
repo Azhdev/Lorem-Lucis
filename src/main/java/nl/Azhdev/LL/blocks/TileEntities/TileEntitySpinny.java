@@ -1,5 +1,7 @@
 package nl.Azhdev.LL.blocks.TileEntities;
 
+import java.util.Random;
+
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.passive.EntityPig;
@@ -7,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
@@ -14,9 +17,7 @@ import net.minecraft.world.World;
 import nl.Azhdev.core.api.packet.NetworkHandler;
 import nl.Azhdev.core.api.packet.PacketPlaySound;
 
-import java.util.Random;
-
-public class TileEntitySpinny extends TileEntity {
+public class TileEntitySpinny extends TileEntity implements IUpdatePlayerListBox{
 
 	private float rotation;
 	private float bobpos;
@@ -30,7 +31,7 @@ public class TileEntitySpinny extends TileEntity {
 	private EntityPlayer player;
 	
 	@Override
-	public void updateContainingBlockInfo(){
+	public void update(){
 		if(worldObj.isRemote){
 			rotation += 0.01F;
 			bobpos += 0.02F;
@@ -40,8 +41,8 @@ public class TileEntitySpinny extends TileEntity {
 				if(shouldCount){
 					if(cooldown < 1200){
 						cooldown++;
-						//String n = "" + cooldown;
-						//player.addChatComponentMessage(new ChatComponentText(n));
+						String n = "" + cooldown;
+						player.addChatComponentMessage(new ChatComponentText(n));
 					}else{
 						cooldown = 0;
 						shouldCount = false;
@@ -50,7 +51,7 @@ public class TileEntitySpinny extends TileEntity {
 					}
 				}
 			}
-			this.markDirty();
+			
 		}
 	}
 
@@ -134,7 +135,7 @@ public class TileEntitySpinny extends TileEntity {
 		}else if(i == 12){
 			world.setBlockState(new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ()), Blocks.jukebox.getDefaultState());
 		}
-		NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("LL:bleep", pos.getX(), pos.getY(), pos.getZ(), 1.0F, 1.0F));
+		NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("LL:bleep", pos.getX(), pos.getY(), pos.getZ(), 1.0F, 1.0F, worldObj));
 }
 	
 	
@@ -180,9 +181,9 @@ public class TileEntitySpinny extends TileEntity {
 			player.destroyCurrentEquippedItem();
 		}
 		if(i == 1 || i == 2){
-			NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("LL:boneyScream", pos.getX(), pos.getY(), pos.getZ(), 1, 1));
+			NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("LL:boneyScream", pos.getX(), pos.getY(), pos.getZ(), 1, 1, worldObj));
 		}else{
-			NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("LL:bleep", pos.getX(), pos.getY(), pos.getZ(), 1.0F, 1.0F));
+			NetworkHandler.INSTANCE.sendToAll(new PacketPlaySound("LL:bleep", pos.getX(), pos.getY(), pos.getZ(), 1.0F, 1.0F, worldObj));
 		}
 	}
 	
